@@ -1,10 +1,26 @@
+/* Compile note - gcc -Wall -Werror -ansi -c 'filename'.c
+gcc -Wall -Werror 'filename'.o 'otherfile'.o 'main'.o -o Main
+*/
+
+#define MAX_USERS 20
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "LinkedList.h"
+#include "AddUser.h"
+
 /*******************************************************************************
  * Function prototypes
 *******************************************************************************/
 void admin_menu(void);
 void user_menu(void);
-nt task_admin_selector(/* not sure what to put here*/);
-int task_user_selector(/* not sure what to put here*/);
+int task_admin_selector(void);
+int task_user_selector(void);
+
+/*******************************************************************************
+ * Structures
+*******************************************************************************/
 
 /*******************************************************************************
  * Author: Owen
@@ -12,24 +28,33 @@ int task_user_selector(/* not sure what to put here*/);
 *******************************************************************************/
 int main(void)
 {
-	
-	int close = 0; /* for the task selectors. */
+	char username[20];
+	/* int close = 0; for the task selectors. */
 	
 	/*if admin log in. */
-	do
+	printf("Enter Username > ");
+	scanf("%s", username);
+
+	if(strcmp(username, "admin") == 0)
 	{
-	admin_menu();
-	/*  something = task_admin_selector ()*/
+		task_admin_selector();
 	}
-	while(close < 1); /* inside the main somewhere to close the program. */
+	else
+	{
+		task_user_selector();
+	}
+
+
+	/*  something = task_admin_selector ()*/
+	
+	 /* while(close < 1); inside the main somewhere to close the program. */
 	
 	/* if client log in. */
-	do
-	{
-	user_menu();
+	
+	
 	/* something = task_user_selector ()*/
-	}
-	while(close < 1); /* inside the main somewhere to close the program. */
+	
+	/* while(close < 1);  inside the main somewhere to close the program. */
 }
 /*******************************************************************************
  * Author: Owen
@@ -42,8 +67,7 @@ int main(void)
 *******************************************************************************/
 void admin_menu(void)
 {
-	printf("\n"
-		   "1. Add User\n"
+	printf("1. Add User\n"
 		   "2. Delete User\n"
 		   "3. Edit Username/Password\n"
 		   "4. View User Log\n"
@@ -61,45 +85,47 @@ void admin_menu(void)
  * outputs:
  * - none
 *******************************************************************************/
-int task_admin_selector(/* not sure what to put here*/)
+int task_admin_selector(void)
 {
-	/* input */
-	i = 0;
-	/* Scans input from the user and directs the user to the right function.*/
-	scanf("%d", &i);
 	
-	switch (i)
-	{ /* Comment out get each case to test each function works. */
-		case 1: 
-			add_user(account_t* account);
-			break;
-		case 2: 
-			delete_user(account_t* account);
-			break;
-		case 3: 
-			edit_login(account_t* account);
-			break;
-		case 4: 
-			view_user_log(const account_t* account);
-			break;
-		case 5: 
-			view_user_info(const account_t* account);
-			break;
-		case 6; 
-			/*log off function */
-			break;
-		case 7: 
-			*close = 1; /* exit program */
-			break;
+	while(1)
+	{
+		admin_menu();
+		/* input */
+		int i = 0, total_users = 0;
+		/* Scans input from the user and directs the user to the right function.*/
+		scanf("%d", &i);
+
+		switch (i)
+		{ /* Comment out get each case to test each function works. */
+			case 1: 
+				add_user(node_t* head, int* total_users);
+				break;
+			case 2: 
+				
+				break;
+			case 3: 
+				
+				break;
+			case 4: 
+				
+				break;
+			case 5: 
+				
+				break;
+			case 6:
+				
+				break;
+			case 7: 
+				/* *close = 1;  exit program */
+				return 0;
+			default:
+			printf("Invalid choice.\n");
+		}
 	}
-	/* checks the users input to the switch cases */
-	if (i <= 0 || i > 7)
-        {
-            printf("\n"
-				   "Invalid choice.\n");
-        }
-     return /*something */;
+	return 1;
 }
+
 /*******************************************************************************
  * Author: Owen
  * This function prints the user menu with all instructions on how to use
@@ -130,45 +156,47 @@ void user_menu(void)
  * outputs:
  * - none
 *******************************************************************************/
-int task_user_selector(/* not sure what to put here. */)
-{
-	/* Input */
-	i = 0;
-	/* Scans input from the user and directs the user to the right function.*/
-	scanf("%d", &i);
-	
-	switch (i)
-	{ /* Comment out get each case to test each function works. */
-		case 1: 
-			/* create an account function */
-			break;
-		case 2: 
-			cash_deposit(account_t* account);
-			break;
-		case 3: 
-			cash_withdraw(account_t* account);
-			break;
-		case 4: 
-			transfer(account_t* account);
-			break;
-		case 5: 
-			/* View balance function*/
-			break;
-		case 6: 
-			/*View perssonal info function*/
-			break;
-		case 7; 
-			/* whatever log out function */
-			break;
-		case 8: 
-			*close = 1; /* exit program */
-			break;
+int task_user_selector(void)
+{	
+	while(1)
+	{
+		user_menu();
+			/* Input */
+		int i = 0;
+		/* Scans input from the user and directs the user to the right function.*/
+		scanf("%d", &i);
+		
+		switch (i)
+		{ /* Comment out get each case to test each function works. */
+			case 1: 
+				/* create an account function */
+				break;
+			case 2: 
+				
+				break;
+			case 3: 
+				
+				break;
+			case 4: 
+				
+				break;
+			case 5: 
+				/* View balance function*/
+				break;
+			case 6: 
+				/*View perssonal info function*/
+				break;
+			case 7:
+				/* whatever log out function */
+				break;
+			case 8: 
+				/*  *close = 1; exit program */
+				return 0;
+				break;
+			default:
+				printf("Invalid choice.\n");
+		}
 	}
-	/* checks the users input to the switch cases */
-	if (i <= 0 || i > 8)
-        {
-            printf("\n"
-				   "Invalid choice.\n");
-        }
-     return /*something not sure tho. */;
+
+     return 0;
 }

@@ -1,62 +1,54 @@
-#define TRUE 1
-#define FALSE 0
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "LinkedList.h"
+#include "AddUser.h"
 
 #define MAX_FIRSTNAME_LEN 30
-#define MAX_LASTNAME_LEN
+#define MAX_LASTNAME_LEN 256
 #define MAX_EMAIL_LEN 256
 #define MAX_ADDRESS_LEN 256
-
+#define MAX_USERNAME_LEN 10
+#define MAX_PHONE_LEN 10
 /*******************************************************************************
 * Struct Defined Structures
  ******************************************************************************/
- struct DOB
- {
-     unsigned int day;
-     unsigned int month;
-     unsigned int year;
- };
- typedef struct DOB DOB_t;
-
- struct user
- {
-     char first_name[MAX_FIRSTNAME_LEN];
-     char last_name[MAX_LASTNAME_LEN];
-     DOB_t DOB;
-     unsigned int phone;
-     char email[MAX_EMAIL_LEN];
-     char address[MAX_ADDRESS_LEN];
- };
-typedef struct user user_t;
-
 
 /*******************************************************************************
  * This function adds a user in RAM with all instructions on how to use
  * this program.
  * inputs:
- * - users_t* users_p ; points to the elements of users array
+ * - users_t* temp_user ; points to the elements of users array
  * - int total_users; stores the number of flights currently stored in
  *   users array
  * outputs:
  * - none
 *******************************************************************************/
-void add_user(user_t* users_p, int total_users)
+node_t* add_user(node_t* head, int* total_users)
 {
+    system("clear");
+
+    printf("Please provide the following personal information\n\n"
+           "----------------------------------------------------\n");
+
+    user_t temp_user;
+
     /* Get First Name */
     while(1)
     {
-        printf("First Name>\n ");
+        printf("First Name>\n");
 
-        scanf("%[^\n]", users_p[total_users].first_name);
+        scanf("%[^\n]", temp_user.first_name);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate first name */
-        if(is_name_valid(users_p[total_users].first_name)==TRUE)
+        /* validate first name
+        if(is_name_valid(temp_user.first_name)==TRUE)
         {
             break;
-        }
-
+        }*/
+        break;
         printf("Invalid input. Do not enter any symbol.\n");
     }
 
@@ -65,17 +57,17 @@ void add_user(user_t* users_p, int total_users)
     {
         printf("Last Name>\n");
 
-        scanf("%[^\n]", users_p[total_users].last_name);
+        scanf("%[^\n]", temp_user.last_name);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate last name*/
-        if(is_name_valid(users_p[total_users].last_name)==TRUE)
+        /* validate last name
+        if(is_name_valid(temp_user.last_name)==TRUE)
         {
             break;
-        }
-
+        }*/
+        break;
         printf("Invalid input. Do not enter any symbol\n");
     }
 
@@ -84,21 +76,21 @@ void add_user(user_t* users_p, int total_users)
     {
         printf("DOB (dd/mm/yyyy)>\n");
 
-        scanf("%d/%d/%d", &users_p[total_users].DOB.day,
-                          &users_p[total_users].DOB.month,
-                          &users_p[total_users].DOB.year);
+        scanf("%d/%d/%d", &temp_user.DOB.day,
+                          &temp_user.DOB.month,
+                          &temp_user.DOB.year);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate DOB */
-        if(is_valid_DOB( users_p[total_users].DOB.day,
-                         users_p[total_users].DOB.month,
-                         users_p[total_users].DOB.year)==TRUE)
+        /* validate DOB
+        if(is_valid_DOB( temp_user.DOB.day,
+                         temp_user.DOB.month,
+                         temp_user.DOB.year)==TRUE)
         {
             break;
-        }
-
+        }*/
+        break;
         printf("Invalid input\n");
     }
 
@@ -106,57 +98,117 @@ void add_user(user_t* users_p, int total_users)
     /* Get Phone Number */
     while(1)
     {
-        printf("Phone>\n ");
+        printf("Phone>\n");
 
-        scanf("%d", &users_p[total_users].phone);
+        scanf("%s", temp_user.phone);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
         /* validate phone
-        if(is_phone_valid(users_p[total_users].phone)==TRUE)
+        if(is_phone_valid(temp_user.phone)==TRUE)
         {
             break;
         }*/
-
+        break;
         printf("Invalid input\n");
     }
 
     /* Get Email */
     while(1)
     {
-        printf("Email>\n ");
+        printf("Email>\n");
 
-        scanf("%[^\n]", users_p[total_users].email);
+        scanf("%[^\n]", temp_user.email);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
         /* validate email
-        if(is_email_valid(users_p[total_users].email)==TRUE)
+        if(is_email_valid(temp_user.email)==TRUE)
         {
             break;
         }*/
-
+        break;
         printf("Invalid input\n");
     }
 
     /* Get Address */
     while(1)
     {
-        printf("Address>\n ");
+        printf("Address>\n");
 
-        scanf("%[^\n]", users_p[total_users].address);
+        scanf("%[^\n]", temp_user.address);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
         /* validate address
-        if(is_name_address(users_p[total_users].address)==TRUE)
+        if(is_name_address(temp_user.address)==TRUE)
         {
             break;
         }*/
 
+        break;
+
         printf("Invalid input\n");
     }
+
+    system("clear");
+
+    printf("Please input the Username and Password\n\n"
+           "----------------------------------------\n\n");
+
+    while(1)
+    {
+        printf("\tUsername: ");
+        scanf("%s", temp_user.login.username);
+
+        /* clears the input buffer */
+        while (getchar()!='\n');
+
+        /* search for duplicates */
+
+        break;
+
+        printf("This username is already taken!\n");
+    }
+
+    while(1)
+    {
+        printf("\tPassword: ");
+        scanf("%s", temp_user.login.password);
+
+        /* clears the input buffer */
+        while (getchar()!='\n');
+
+        /* check for password validity */
+
+        break;
+
+        printf("Password must be 8-10 characters long!");
+    }
+
+    /* creates a new balance account with balance $0.00 */
+
+    system("clear");
+
+    temp_user.balance=0.00;
+
+    printf("User %s has been created successfully!\n", temp_user.first_name);
+    printf("\nAccount Details:\n\n");
+    printf("\tAccount Type: Balance\n\tNet Balance: $%.2f\n", temp_user.balance);
+    printf("\n\n\n\n\nPress Enter to continue...");
+
+    if(*(total_users)==0)
+        head=create_head(temp_user);
+
+    else
+        insert_node(head, temp_user);
+
+    ++*(total_users);
+
+    while (getchar()!='\n');
+
+    return head;
 }
