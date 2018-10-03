@@ -1,5 +1,8 @@
 /* Compile note - gcc -Wall -Werror -ansi -c 'filename'.c
 gcc -Wall -Werror 'filename'.o 'otherfile'.o 'main'.o -o Main
+
+git git add . --> git commit -m "comment" --> as, 1!
+
 */
 
 #include <stdio.h>
@@ -26,6 +29,11 @@ gcc -Wall -Werror 'filename'.o 'otherfile'.o 'main'.o -o Main
 #include "UserFunctions.h"
 #endif
 
+#ifndef ADMIN_FUNCTIONS_H
+#define ADMIN_FUNCTIONS_H
+#include "AdminFunctions.h"
+#endif
+
 /*******************************************************************************
  * Function prototypes
 *******************************************************************************/
@@ -39,7 +47,7 @@ int task_user_selector(node_t* head);
 *******************************************************************************/
 
 /*******************************************************************************
- * Author: Owen
+ * Author: Owen, Sophie
  * Main
 *******************************************************************************/
 int main(void)
@@ -59,19 +67,25 @@ int main(void)
 		while(getchar()!='\n');
 		system("clear");
 
-		if(strcmp(username, "admin"))
+		if(strcmp(username, "admin") == 0)
 		{
-			task_admin_selector(head);
+			if(task_admin_selector(head) == 1)
+			{
+				break;
+			}
+
 		}
 		else
 		{
-			task_user_selector(head);
+			if(task_user_selector(head) == 1)
+			{
+				break;
+			}
 		}
 
 	}
 	
-
-
+	void save_file(node_t* head);
 
 	/*  something = task_admin_selector ()*/
 	
@@ -98,7 +112,7 @@ void admin_menu(void)
 {
 	printf("1. Add User\n"
 		   "2. Delete User\n"
-		   "3. Edit Username/Password\n"
+		   "3. Edit User Information\n"
 		   "4. View User Log\n"
 		   "5. View User Info\n"
 		   "6. Log Off\n"
@@ -107,7 +121,7 @@ void admin_menu(void)
 }
 
 /*******************************************************************************
- * Author: Owen
+ * Author: Owen, Sophie
  * This function switches between tasks for the admin side of the program.
  * inputs:
  * - none
@@ -137,20 +151,18 @@ int task_admin_selector(node_t* head)
 				
 				break;
 			case 3: 
-				
+				edit_info(user);
 				break;
 			case 4: 
 				
 				break;
 			case 5: 
-				
+				view_user_info(head);
 				break;
 			case 6:
-				return 1;
-				break;
-			case 7: 
-				/* *close = 1;  exit program */
 				return 0;
+			case 7: 
+				return 1;
 			default:
 			printf("Invalid choice.\n");
 		}
@@ -170,18 +182,17 @@ int task_admin_selector(node_t* head)
 void user_menu(void)
 {
 	printf("\n"
-		   "1. Create New Account\n"
-		   "2. Cash Deposit\n"
-		   "3. Cash Withdraw\n"
-		   "4. Funds Transfer\n"
-		   "5. View Balance\n"
-		   "6. View Personal Info\n"
-		   "7. Log Off\n"
-		   "8. Exit Program\n"
-		   "Enter choice (Between 1-8)>\n");
+		   "1. Cash Deposit\n"
+		   "2. Cash Withdraw\n"
+		   "3. Funds Transfer\n"
+		   "4. View Balance\n"
+		   "5. View Personal Info\n"
+		   "6. Log Off\n"
+		   "7. Exit Program\n"
+		   "Enter choice (Between 1-7)>\n");
 }
 /*******************************************************************************
- * Author: Owen
+ * Author: Owen, Sophie
  * This function switches between tasks for the user side of the program.
  * inputs:
  * - none
@@ -203,32 +214,25 @@ int task_user_selector(node_t* head)
 		switch (i)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
-				/* create an account function */
+
 				break;
 			case 2: 
-
+				
 				break;
 			case 3: 
 				
 				break;
 			case 4: 
-				
+				system("clear");
+				printf("Your balance is currently %d", user.balance);
 				break;
 			case 5: 
-				/* View balance function*/
+				print_struct(user);
 				break;
-			case 6: 
-				
-				/*View perssonal info function*/
-				break;
-			case 7:
-				/* whatever log out function */
+			case 6:
 				return 0;
-				break;
-			case 8: 
-				/*  *close = 1; exit program */
+			case 7: 
 				return 1;
-				break;
 			default:
 				printf("Invalid choice.\n");
 		}

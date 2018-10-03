@@ -1,3 +1,12 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
+#include "LinkedList.h"
+#endif
+
 /*******************************************************************************
  * Author: Sophie
  * This function prompts a user to enter a integer amount to be deposited into
@@ -7,7 +16,7 @@
  * outputs:
  * - new balance
 *******************************************************************************/
-void deposit(node_t user)
+void deposit(user_t user)
 {
 	while(0)
 	{
@@ -40,7 +49,10 @@ void deposit(node_t user)
  * outputs:
  * - new balance
 *******************************************************************************/
-
+void withdraw(user_t user)
+{
+	return 1;
+}
 /*******************************************************************************
  * Author: Sophie 
  * This function prompts the user to enter an integer amount to be transferred
@@ -50,3 +62,7 @@ void deposit(node_t user)
  * outputs:
  * - new balance
 *******************************************************************************/
+void transfer(user_t user)
+{
+	return 1;
+}

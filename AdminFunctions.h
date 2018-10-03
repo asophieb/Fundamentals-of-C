@@ -1,0 +1,1 @@
+void edit_info(user_t user);

@@ -5,6 +5,7 @@
 #define MAX_USERNAME_LEN 10
 #define MAX_PHONE_LEN 10
 #define MAX_PASSWORD_LEN 10
+#define DATABASE "user.txt"
 
  typedef struct DOB
  {
