@@ -4,8 +4,34 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "AddUser.h"
+
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 #include "LinkedList.h"
+#endif 
+
+#ifndef ADD_USER_H
+#define ADD_USER_H
+#include "AddUser.h"
+#endif 
+
+node_t* create_head(const user_t new_user)
+{
+    node_t* head=NULL;
+
+    head = (node_t*) malloc(sizeof(node_t));
+
+    if(head==NULL)
+    {
+        return NULL;
+    }
+
+    head->user=new_user;
+    head->next=NULL;
+    head->previous=NULL;
+
+    return head;
+}
 
 /* inserts node at the end */
 node_t* insert_node (node_t* head, user_t new_user)
@@ -147,4 +173,107 @@ void print_node (node_t* to_be_printed)
 {
     print_struct(to_be_printed->user);
 }
+
+
+void save_node(FILE* fp, node_t* node)
+{
+    fprintf(fp,"%s\n", node->user.login.username);
+    fprintf(fp,"%s\n", node->user.login.password);
+    fprintf(fp, "%s\n", node->user.first_name);
+    fprintf(fp,"%s\n", node->user.last_name);
+
+    fprintf(fp, "%02d%02d%04d\n", node->user.DOB.day,
+                                  node->user.DOB.month,
+                                  node->user.DOB.year);
+
+    fprintf(fp, "%s\n", node->user.phone);
+    fprintf(fp,"%s\n",node->user.address);
+    fprintf(fp, "%s\n", node->user.email);
+    fprintf(fp, "%.2f\n", node->user.balance);
+}
+
+
+void save_file(node_t* head)
+{
+    FILE *fp;
+
+    fp = fopen (DATABASE, "w");
+
+    if(fp==NULL)
+        printf("Read Error!\n");
+
+    else
+    {
+        node_t* current=head;
+
+        goto SAVE;
+
+        while(current->next!=NULL)
+        {
+            current=current->next;
+
+            SAVE:
+            save_node(fp, current);
+
+        }
+     }
+
+    fclose(fp);
+}
+
+/* returns the head of the linked list */
+node_t* load_file (int* total_users)
+{
+    FILE *fp;
+
+    fp = fopen (DATABASE, "r");
+
+    user_t user;
+
+    node_t* head=NULL;
+
+    head=(node_t*) malloc(sizeof(node_t));
+
+    if(fp==NULL)
+        printf("Read Error!\n");
+
+    else
+    {
+
+        *total_users=0;
+
+        while(fgetc(fp)!=EOF)
+        {
+            fseek(fp,-1,SEEK_CUR); /* moves cursor 1 character behind */
+
+            fscanf(fp,"%[^\n]\n", user.login.username);
+            fscanf(fp,"%[^\n]\n", user.login.password);
+            fscanf(fp, "%[^\n]\n", user.first_name);
+            fscanf(fp,"%[^\n]\n", user.last_name);
+
+            fscanf(fp, "%2d%2d%4d\n", &user.DOB.day,
+                                      &user.DOB.month,
+                                      &user.DOB.year);
+
+            fscanf(fp, "%[^\n]\n", user.phone);
+            fscanf(fp,"%[^\n]\n",user.address);
+            fscanf(fp, "%[^\n]\n", user.email);
+            fscanf(fp, "%f\n", &user.balance);
+
+            if(*(total_users)==0)
+                head=create_head(user);
+
+            else
+                insert_node(head, user);
+
+
+            ++*(total_users);
+        }
+    }
+
+    fclose(fp);
+
+    return head;
+}
+
 

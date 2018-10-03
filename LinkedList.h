@@ -1,6 +1,3 @@
-#ifndef ADD_USER_H
-#define ADD_USER_H 
-
 #define MAX_FIRSTNAME_LEN 30
 #define MAX_LASTNAME_LEN 256
 #define MAX_EMAIL_LEN 256
@@ -54,5 +51,7 @@ node_t* search_data (node_t* head, char* search_username);
 void print_struct (user_t user);
 void print_all_nodes (node_t* head);
 void print_node (node_t* to_be_printed);
+void save_node(FILE* fp, node_t* node);
+void save_file(node_t* head);
+node_t* load_file (int* total_users);
 
-#endif

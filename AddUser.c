@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "LinkedList.h"
-#include "AddUser.h"
 
 #define MAX_FIRSTNAME_LEN 30
 #define MAX_LASTNAME_LEN 256
@@ -10,6 +8,16 @@
 #define MAX_ADDRESS_LEN 256
 #define MAX_USERNAME_LEN 10
 #define MAX_PHONE_LEN 10
+
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
+#include "LinkedList.h"
+#endif
+
+#ifndef ADD_USER_H
+#define ADD_USER_H
+#include "AddUser.h"
+#endif
 /*******************************************************************************
 * Struct Defined Structures
  ******************************************************************************/
