@@ -10,11 +10,6 @@
 #include "LinkedList.h"
 #endif 
 
-#ifndef ADD_USER_H
-#define ADD_USER_H
-#include "AddUser.h"
-#endif 
-
 /*******************************************************************************
  * Author: Rohan
  * This function creates the head of the linked list.

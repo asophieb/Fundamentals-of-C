@@ -1,7 +1,7 @@
 /* Compile note - gcc -Wall -Werror -ansi -c 'filename'.c
 gcc -Wall -Werror 'filename'.o 'otherfile'.o 'main'.o -o Main
 
-git git add . --> git commit -m "comment" --> as, 1!
+git git add . --> git commit -m "comment" --> git push origin master  as, 1!
 
 */
 
@@ -24,14 +24,14 @@ git git add . --> git commit -m "comment" --> as, 1!
 #include "Login.h"
 #endif
 
-#ifndef USER_FUNCTIONS_H
-#define USER_FUNCTIONS_H
-#include "UserFunctions.h"
+#ifndef USER_H
+#define USER_H
+#include "User.h"
 #endif
 
-#ifndef ADMIN_FUNCTIONS_H
-#define ADMIN_FUNCTIONS_H
-#include "AdminFunctions.h"
+#ifndef ADMIN_H
+#define ADMIN_H
+#include "Admin.h"
 #endif
 
 /*******************************************************************************
@@ -52,6 +52,10 @@ int task_user_selector(node_t* head);
 *******************************************************************************/
 int main(void)
 {
+	#ifdef DEBUG
+		printf("help\n");
+	#endif
+
 	node_t* head = NULL;
 	head = (node_t*) malloc(sizeof(node_t));
 

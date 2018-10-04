@@ -1,3 +1,6 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
 #define MAX_FIRSTNAME_LEN 30
 #define MAX_LASTNAME_LEN 256
 #define MAX_EMAIL_LEN 256
@@ -7,41 +10,36 @@
 #define MAX_PASSWORD_LEN 10
 #define DATABASE "user.txt"
 
- typedef struct DOB
- {
-     unsigned int day;
-     unsigned int month;
-     unsigned int year;
- } DOB_t;
+typedef struct DOB
+{
+    unsigned int day;
+    unsigned int month;
+    unsigned int year;
+} DOB_t;
 
- typedef struct login
- {
-     char username [MAX_USERNAME_LEN+1];
-     char password [MAX_PASSWORD_LEN+1];
- } login_t;
+typedef struct login
+{
+    char username [MAX_USERNAME_LEN+1];
+    char password [MAX_PASSWORD_LEN+1];
+} login_t;
 
 typedef struct users
- {
-
+{
     login_t login;
-
-     char first_name[MAX_FIRSTNAME_LEN+1];
-     char last_name[MAX_LASTNAME_LEN+1];
-     DOB_t DOB;
-     char phone[MAX_PHONE_LEN+1];
-     char email[MAX_EMAIL_LEN+1];
-     char address[MAX_ADDRESS_LEN+1];
-
-     float balance;
-
- } user_t;
+    char first_name[MAX_FIRSTNAME_LEN+1];
+    char last_name[MAX_LASTNAME_LEN+1];
+    DOB_t DOB;
+    char phone[MAX_PHONE_LEN+1];
+    char email[MAX_EMAIL_LEN+1];
+    char address[MAX_ADDRESS_LEN+1];
+    float balance;
+} user_t;
 
 typedef struct node
 {
     user_t user;
     struct node* next;
     struct node* previous;
-
 } node_t;
 
 node_t* create_head(const user_t new_user);
@@ -57,3 +55,4 @@ void save_node(FILE* fp, node_t* node);
 void save_file(node_t* head);
 node_t* load_file (int* total_users);
 
+#endif
