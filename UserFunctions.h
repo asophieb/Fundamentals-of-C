@@ -1,1 +1,0 @@
-void deposit(user_t user);
