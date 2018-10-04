@@ -15,6 +15,15 @@
 #include "AddUser.h"
 #endif 
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function creates the head of the linked list.
+ * inputs:
+ * - number of users currently in system
+ * outputs:
+ * - ppinter to node
+*******************************************************************************/
+
 node_t* create_head(const user_t new_user)
 {
     node_t* head=NULL;
@@ -33,7 +42,15 @@ node_t* create_head(const user_t new_user)
     return head;
 }
 
-/* inserts node at the end */
+/*******************************************************************************
+ * Author: Rohan
+ * This function inserts node at the end of linked list.
+ * inputs:
+ * - pointer to first node, newly created user
+ * outputs:
+ * - pointer to node
+*******************************************************************************/
+
 node_t* insert_node (node_t* head, user_t new_user)
 {
     node_t* current = head;
@@ -60,6 +77,15 @@ node_t* insert_node (node_t* head, user_t new_user)
     return new_node;
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function removes the first node in the linked list.
+ * inputs:
+ * - pointer to first node
+ * outputs:
+ * - pointer to head
+*******************************************************************************/
+
 node_t* remove_head (node_t* current_head)
 {
     node_t* new_head = current_head->next;
@@ -73,6 +99,15 @@ node_t* remove_head (node_t* current_head)
     return new_head;
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function removes the last node in the linked list.
+ * inputs:
+ * - pointer to last node
+ * outputs:
+ * - none
+*******************************************************************************/
+
 void remove_tail (node_t* current_tail)
 {
     node_t* new_tail = current_tail->previous;
@@ -83,7 +118,15 @@ void remove_tail (node_t* current_tail)
     current_tail=NULL;
 }
 
-/* removes nodes at the specified address */
+/*******************************************************************************
+ * Author: Rohan
+ * This function removes nodes at a specified address.
+ * inputs:
+ * - pointer to first node, node to be deleted 
+ * outputs:
+ * - pointer to head
+*******************************************************************************/
+
 node_t* remove_node (node_t* current_head, node_t* to_be_deleted)
 {
     node_t* new_head;
@@ -118,6 +161,14 @@ node_t* remove_node (node_t* current_head, node_t* to_be_deleted)
     return current_head;
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function returns the addres of a specific node.
+ * inputs:
+ * - pointer to first node, user ID
+ * outputs:
+ * - pointer to node
+*******************************************************************************/
 
 /* returns the address of the node*/
 node_t* search_data (node_t* head, char* search_username)
@@ -138,7 +189,15 @@ node_t* search_data (node_t* head, char* search_username)
     return NULL;
 }
 
-/* print struct */
+/*******************************************************************************
+ * Author: Rohan
+ * This function prints the user struct.
+ * inputs:
+ * - user 
+ * outputs:
+ * - none
+*******************************************************************************/
+
 void print_struct (user_t user)
 {
     printf("Username: %s\n", user.login.username); 
@@ -149,6 +208,15 @@ void print_struct (user_t user)
     printf("Email: %s\n", user.email);
     printf("Address: %s\n", user.address);
 }
+
+/*******************************************************************************
+ * Author: Rohan
+ * This function prints all nodes in the linked list.
+ * inputs:
+ * - pointer to first node
+ * outputs:
+ * - none
+*******************************************************************************/
 
 /* print all the nodes in the list */
 void print_all_nodes (node_t* head)
@@ -168,7 +236,15 @@ void print_all_nodes (node_t* head)
 
 }
 
-/* print a specific node */
+/*******************************************************************************
+ * Author: Rohan
+ * This function prints a specific node.
+ * inputs:
+ * - node to be printed
+ * outputs:
+ * - none
+*******************************************************************************/
+
 void print_node (node_t* to_be_printed)
 {
     print_struct(to_be_printed->user);
@@ -192,6 +268,14 @@ void save_node(FILE* fp, node_t* node)
     fprintf(fp, "%.2f\n", node->user.balance);
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function saves the linked list.
+ * inputs:
+ * - poiner to first node
+ * outputs:
+ * - nonde
+*******************************************************************************/
 
 void save_file(node_t* head)
 {
@@ -220,6 +304,15 @@ void save_file(node_t* head)
 
     fclose(fp);
 }
+
+/*******************************************************************************
+ * Author: Rohan
+ * This function loads a saved linked list.
+ * inputs:
+ * - number of users.
+ * outputs:
+ * - pointer to head
+*******************************************************************************/
 
 /* returns the head of the linked list */
 node_t* load_file (int* total_users)

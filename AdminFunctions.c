@@ -1,12 +1,68 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 #include "LinkedList.h"
 #endif
 
-void edit_info(user_t user)
+/*******************************************************************************
+ * Author: Sophie
+ * This function prompts a user to enter a user to be deleted.
+ * inputs:
+ * - pointer to first node
+ * outputs:
+ * - none
+*******************************************************************************/
+
+void delete_user(node_t* head)
+{
+	char choice[MAX_USERNAME_LEN];
+	char* confirm;
+	node_t* user;
+
+	while(0)
+	{
+		system("clear");
+		printf("Enter the user ID of the user to be deleted > ");
+		scanf("%s", choice);
+		user = search_data(head, choice);
+
+		if(user != NULL)
+		{
+			system("clear");
+			print_node(user);
+			printf("Do you want to delete this user? y or n > ");
+			scanf("%c", confirm);
+			if(strcmp(confirm, "y"))
+			{
+				remove_node(head, user);
+				break;
+			}
+		}
+
+		else
+		{
+			printf("Please enter a valid choice.");
+		}
+	}
+
+}
+
+/*******************************************************************************
+ * Author: Sophie
+ * This function allows the user to edit user information.
+ * inputs:
+ * - user
+ * outputs:
+ * - none
+*******************************************************************************/
+
+int edit_info(user_t user)
 {
 	char placeholder[256];
-	char choice;
+	char* choice;
 
 	while(1)
 	{
@@ -34,7 +90,7 @@ void edit_info(user_t user)
 			case 1: 
 				while(0)
 				{
-					printf("Enter the new first name > ")
+					printf("Enter the new first name > ");
 					scanf("%s", placeholder);
 					system("clear");
 					printf("The user's first name will change from %s to %s",
@@ -76,6 +132,15 @@ void edit_info(user_t user)
 		}
 	}
 }
+
+/*******************************************************************************
+ * Author: Sophie
+ * This function prints either a specifc user or all users
+ * inputs:
+ * - pointer to first node 
+ * outputs:
+ * - none
+*******************************************************************************/
 
 void view_user_info(node_t* head)
 {

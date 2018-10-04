@@ -48,6 +48,7 @@ node_t* create_head(const user_t new_user);
 node_t* insert_node (node_t* head, user_t new_user);
 node_t* remove_head (node_t* current_head);
 void remove_tail (node_t* current_tail);
+node_t* remove_node (node_t* current_head, node_t* to_be_deleted);
 node_t* search_data (node_t* head, char* search_username);
 void print_struct (user_t user);
 void print_all_nodes (node_t* head);

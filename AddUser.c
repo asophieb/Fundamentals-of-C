@@ -18,20 +18,16 @@
 #define ADD_USER_H
 #include "AddUser.h"
 #endif
-/*******************************************************************************
-* Struct Defined Structures
- ******************************************************************************/
 
 /*******************************************************************************
- * This function adds a user in RAM with all instructions on how to use
- * this program.
+ * Author: Rohan
+ * This function creates a new user and add to the linked list .
  * inputs:
- * - users_t* temp_user ; points to the elements of users array
- * - int total_users; stores the number of flights currently stored in
- *   users array
+ * - pointer to first node, number of users
  * outputs:
- * - none
+ * - ppinter to first node
 *******************************************************************************/
+
 node_t* add_user(node_t* head, int* total_users)
 {
     system("clear");
