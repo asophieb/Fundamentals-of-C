@@ -19,10 +19,10 @@
 void delete_user(node_t* head)
 {
 	char choice[MAX_USERNAME_LEN];
-	char* confirm;
+	char confirm;
 	node_t* user;
 
-	while(0)
+	while(1)
 	{
 		system("clear");
 		printf("Enter the user ID of the user to be deleted > ");
@@ -34,17 +34,23 @@ void delete_user(node_t* head)
 			system("clear");
 			print_node(user);
 			printf("Do you want to delete this user? y or n > ");
-			scanf("%c", confirm);
-			if(strcmp(confirm, "y"))
+			scanf(" %c", &confirm);
+			if(strcmp(&confirm, "y"))
 			{
 				remove_node(head, user);
+				break;
+			}
+			else
+			{
+				printf("User will not be deleted.\n");
 				break;
 			}
 		}
 
 		else
 		{
-			printf("Please enter a valid choice.");
+			printf("Please enter a valid choice.\n");
+			break;
 		}
 	}
 
@@ -59,76 +65,89 @@ void delete_user(node_t* head)
  * - none
 *******************************************************************************/
 
-int edit_info(user_t user)
+int edit_info(node_t* head)
 {
-	char placeholder[256];
-	char* choice;
+	char placeholder[256], choice[MAX_USERNAME_LEN];
+	char confirm;
+	node_t* node;
 
 	while(1)
 	{
 		system("clear");
-		printf("\n\t\t\tUser Information Editor"
-		   "\n1. First Name"
-		   "\n2. Last Name"
-		   "\n3. Date Of Birth"
-		   "\n4. Phone Number"
-		   "\n5. Email Address"
-		   "\n6. Home Address"
-		   "\n7. Username"
-		   "\n8. Password"
-		   "\n9. Exit Editor"
-   		   "Enter choice (Between 1-9)>\n");
+		printf("Enter the user ID of the user to be edited > ");
+		scanf("%s", choice);
 		
-		int i = 0;
-		/* Scans input from the user and directs the user to the right function.*/
-		scanf("%d", &i);
-		while(getchar()!='\n');
-		system("clear");
-		
-		switch (i)
-		{ /* Comment out get each case to test each function works. */
-			case 1: 
-				while(0)
-				{
-					printf("Enter the new first name > ");
-					scanf("%s", placeholder);
-					system("clear");
-					printf("The user's first name will change from %s to %s",
-							user.first_name, placeholder);
 
-						printf("Do you accept this change? y or n > ");
-						scanf("%c", choice);
-						if(strcmp(choice, "y"))
+		if(search_data(head, choice) != NULL)
+		{
+			node = search_data(head, choice);
+			while(1)
+			{
+				system("clear");
+				printf("\n\t\t\tUser Information Editor"
+				   "\n1. First Name"
+				   "\n2. Last Name"
+				   "\n3. Date Of Birth"
+				   "\n4. Phone Number"
+				   "\n5. Email Address"
+				   "\n6. Home Address"
+				   "\n7. Username"
+				   "\n8. Password"
+				   "\n9. Exit Editor"
+		   		   "\nEnter choice (Between 1-9)>\n");
+				
+				int i = 0;
+				/* Scans input from the user and directs the user to the right function.*/
+				scanf("%d", &i);
+				while(getchar()!='\n');
+				system("clear");
+				
+				switch (i)
+				{ /* Comment out get each case to test each function works. */
+					case 1: 
+						while(1)
 						{
-							strcpy(user.first_name, placeholder);
-							break;
+							printf("Enter the new first name > ");
+							scanf("%s", placeholder);
+							system("clear");
+							printf("The user's first name will change from %s to %s",
+									node->user.first_name, placeholder);
+
+								printf("Do you accept this change? y or n > ");
+								scanf(" %c", &confirm);
+								if(strcmp(&confirm, "y"))
+								{
+									strcpy(node->user.first_name, placeholder);
+									break;
+								}
 						}
+						break;
+					case 2: 
+
+						break;
+					case 3: 
+						
+						break;
+					case 4: 
+						
+						break;
+
+						break;
+					case 6: 
+						
+						break;
+					case 7:
+
+						break;
+					case 8: 
+
+						break;
+					case 9:
+						return 1;
+					default:
+						printf("Invalid choice.\n");
 				}
-				break;
-			case 2: 
-
-				break;
-			case 3: 
-				
-				break;
-			case 4: 
-				
-				break;
-
-				break;
-			case 6: 
-				
-				break;
-			case 7:
-
-				break;
-			case 8: 
-
-				break;
-			case 9:
-				return 1;
-			default:
-				printf("Invalid choice.\n");
+			}
 		}
 	}
 }
@@ -144,29 +163,32 @@ int edit_info(user_t user)
 
 void view_user_info(node_t* head)
 {
-	
+	node_t* user;
 	char choice[MAX_USERNAME_LEN];
 
-	while(0)
+	while(1)
 	{
-		printf("Enter the User ID of a specific user or press * to print all");
+		printf("Enter the User ID of a specific user or press * to print all > ");
 		scanf("%s", choice);
 
-		if(strcmp(choice, "*"))
+		if(!(strcmp(choice, "*")))
 		{
 			print_all_nodes(head);
+			while (getchar()!='\n');
 			break;
 		}
 
 		else if(search_data(head, choice) != NULL)
 		{
-			print_node(search_data(head, choice));
+			user = search_data(head, choice);
+			print_node(user);
+			while (getchar()!='\n');
 			break;
 		}
 
 		else
 		{
-			printf("Please enter a valid choice.");
+			printf("Please enter a valid choice.\n");
 		}
 	}
 }

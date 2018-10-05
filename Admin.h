@@ -1,3 +1,8 @@
-void delete_user(head);
-void edit_info(user_t user);
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
+#include "LinkedList.h"
+#endif
+
+void delete_user(node_t* head);
+void edit_info(node_t* head);
 void view_user_info(node_t* head);

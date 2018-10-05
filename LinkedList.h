@@ -1,5 +1,6 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
+#endif
 
 #define MAX_FIRSTNAME_LEN 30
 #define MAX_LASTNAME_LEN 256
@@ -55,4 +56,4 @@ void save_node(FILE* fp, node_t* node);
 void save_file(node_t* head);
 node_t* load_file (int* total_users);
 
-#endif
+

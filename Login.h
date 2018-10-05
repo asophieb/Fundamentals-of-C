@@ -1,10 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
-#include "LinkedList.h"
-#endif
-
-int Password(char user[]);
+node_t* Username(int* total_user, node_t* head);
+int Password(char user[], node_t* found_address);
+int Admin_Pass(char user[]);

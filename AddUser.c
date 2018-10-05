@@ -19,6 +19,12 @@
 #include "AddUser.h"
 #endif
 
+#ifndef VALIDATE_H
+#define VALIDATE_H
+#include "Validate.h"
+#endif
+
+
 /*******************************************************************************
  * Author: Rohan
  * This function creates a new user and add to the linked list .
@@ -47,12 +53,12 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate first name
-        if(is_name_valid(temp_user.first_name)==TRUE)
+        /* validate first name */
+        if(is_valid_name(temp_user.first_name)==TRUE)
         {
             break;
-        }*/
-        break;
+        }
+
         printf("Invalid input. Do not enter any symbol.\n");
     }
 
@@ -66,12 +72,12 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate last name
-        if(is_name_valid(temp_user.last_name)==TRUE)
+        /* validate last name */
+        if(is_valid_name(temp_user.last_name) == TRUE)
         {
             break;
-        }*/
-        break;
+        }
+
         printf("Invalid input. Do not enter any symbol\n");
     }
 
@@ -87,14 +93,14 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate DOB
+        /* validate DOB */
         if(is_valid_DOB( temp_user.DOB.day,
                          temp_user.DOB.month,
                          temp_user.DOB.year)==TRUE)
         {
             break;
-        }*/
-        break;
+        }
+
         printf("Invalid input\n");
     }
 
@@ -109,12 +115,12 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate phone
-        if(is_phone_valid(temp_user.phone)==TRUE)
+        /* validate phone */
+        if(is_valid_phone(temp_user.phone)==TRUE)
         {
             break;
-        }*/
-        break;
+        }
+
         printf("Invalid input\n");
     }
 
@@ -128,12 +134,12 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate email
-        if(is_email_valid(temp_user.email)==TRUE)
+        /* validate email */
+        if(is_valid_email(temp_user.email)==TRUE)
         {
             break;
-        }*/
-        break;
+        }
+
         printf("Invalid input\n");
     }
 
@@ -147,15 +153,10 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate address
-        if(is_name_address(temp_user.address)==TRUE)
-        {
-            break;
-        }*/
+        /* validate address */
 
         break;
-
-        printf("Invalid input\n");
+        
     }
 
     system("clear");
@@ -171,9 +172,10 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* search for duplicates */
-
-        break;
+        if(is_valid_username(temp_user.login.username) == TRUE)
+        {
+            break;
+        }
 
         printf("This username is already taken!\n");
     }
@@ -186,7 +188,7 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* check for password validity */
+        is_valid_password(temp_user.login.password);
 
         break;
 

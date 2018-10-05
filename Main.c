@@ -39,8 +39,8 @@ git git add . --> git commit -m "comment" --> git push origin master  as, 1!
 *******************************************************************************/
 void admin_menu(void);
 void user_menu(void);
-int task_admin_selector(node_t* head);
-int task_user_selector(node_t* head);
+int task_admin_selector(int total_users, node_t* head);
+int task_user_selector(int total_users, node_t* head, node_t* node);
 
 /*******************************************************************************
  * Structures
@@ -57,23 +57,23 @@ int main(void)
 	#endif
 
 	node_t* head = NULL;
+	node_t* node;
 	head = (node_t*) malloc(sizeof(node_t));
 
-	char username[10];
+	int total_users = 0;
+	load_file(&total_users);
+	system("clear");
+
 	/* int close = 0; for the task selectors. */
 	while(1)
 	{
 		/*if admin log in. */
-		system("clear");
-		printf("\n\t\t\t Welcome to Bank\n\n");
-		printf("\t Username:");
-		scanf("%s", username);
-		while(getchar()!='\n');
-		system("clear");
 
-		if(strcmp(username, "admin") == 0)
+
+		if(Username(&total_users, head) == NULL)
 		{
-			if(task_admin_selector(head) == 1)
+
+			if(task_admin_selector(total_users, head) == 2)
 			{
 				break;
 			}
@@ -81,7 +81,8 @@ int main(void)
 		}
 		else
 		{
-			if(task_user_selector(head) == 1)
+			node = Username(&total_users, head);
+			if(task_user_selector(total_users, head, node) == 2)
 			{
 				break;
 			}
@@ -89,7 +90,7 @@ int main(void)
 
 	}
 	
-	void save_file(node_t* head);
+	save_file(head);
 
 	/*  something = task_admin_selector ()*/
 	
@@ -114,6 +115,7 @@ int main(void)
 *******************************************************************************/
 void admin_menu(void)
 {
+	printf("\n\n\t Welcome to Administration Controls.\n\n");
 	printf("1. Add User\n"
 		   "2. Delete User\n"
 		   "3. Edit User Information\n"
@@ -132,14 +134,14 @@ void admin_menu(void)
  * outputs:
  * - none
 *******************************************************************************/
-int task_admin_selector(node_t* head)
+int task_admin_selector(int total_users, node_t* head)
 {
 	
-	while(0)
+	while(1)
 	{
 		admin_menu();
 		/* input */
-		int i = 0, total_users = 0;
+		int i = 0;
 		/* Scans input from the user and directs the user to the right function.*/
 		scanf("%d", &i);
 		while(getchar()!='\n');
@@ -149,13 +151,12 @@ int task_admin_selector(node_t* head)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
 				head = add_user(head, &total_users);
-				print_node(head);
 				break;
 			case 2: 
-				
+				delete_user(head);
 				break;
 			case 3: 
-				edit_info(user);
+				edit_info(head);
 				break;
 			case 4: 
 				
@@ -166,12 +167,12 @@ int task_admin_selector(node_t* head)
 			case 6:
 				return 0;
 			case 7: 
-				return 1;
+				return 2;
 			default:
 			printf("Invalid choice.\n");
 		}
 	}
-	return 1;
+	return 0;
 }
 
 /*******************************************************************************
@@ -203,7 +204,7 @@ void user_menu(void)
  * outputs:
  * - none
 *******************************************************************************/
-int task_user_selector(node_t* head)
+int task_user_selector(int total_users, node_t* head, node_t* node)
 {	
 	while(1)
 	{
@@ -228,15 +229,16 @@ int task_user_selector(node_t* head)
 				break;
 			case 4: 
 				system("clear");
-				printf("Your balance is currently %d", user.balance);
+
+				printf("Your balance is currently %lf", node->user.balance);
 				break;
 			case 5: 
-				print_struct(user);
+				print_struct(node->user);
 				break;
 			case 6:
 				return 0;
 			case 7: 
-				return 1;
+				return 2;
 			default:
 				printf("Invalid choice.\n");
 		}
