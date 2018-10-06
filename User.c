@@ -109,7 +109,7 @@ void transfer(node_t* head, node_t* node)
 			transfer_node->user.balance = transfer_node->user.balance + amount;
 			node->user.balance = node->user.balance - amount;
 			printf("Your transaction has been processed...\n"
-				   "Your account balance is now $%.2lf", node->user.balance);
+				   "Your account balance is now $%.2lf\n", node->user.balance);
 			printf("--------------------------------------\n");
 
 		}

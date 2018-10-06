@@ -9,6 +9,15 @@ git git add . --> git commit -m "comment" --> git push origin master  as, 1!
 #include <string.h>
 #include <stdlib.h>
 
+#define RED      "\x1B[31m"
+#define GREEN    "\x1B[32m"
+#define YELLOW   "\x1B[33m"
+#define BLUE     "\x1B[34m"
+#define PURPLE   "\x1B[35m"
+#define CYAN     "\x1B[36m"
+#define WHITE    "\x1B[37m"
+#define RESET    "\x1B[0m"
+
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 #include "LinkedList.h"
@@ -72,35 +81,31 @@ int main(void)
 
 		if(node == NULL)
 		{
-
-			if(task_admin_selector(total_users, head) == 2)
+			if(Admin_Pass() != 0)
 			{
-				break;
+				if(task_admin_selector(total_users, head) == 2)
+				{
+					system("clear");
+					break;
+				}
 			}
-
+			
 		}
+
 		else
 		{
-			if(task_user_selector(total_users, head, node) == 2)
+			if(Password(node->user.login.username, node) != 0)
 			{
-				break;
+				if(task_user_selector(total_users, head, node) == 2)
+				{
+					system("clear");
+					break;
+				}
 			}
 		}
 
 	}
-	
-	
 
-	/*  something = task_admin_selector ()*/
-	
-	 /* while(close < 1); inside the main somewhere to close the program. */
-	
-	/* if client log in. */
-	
-	
-	/* something = task_user_selector ()*/
-	
-	/* while(close < 1);  inside the main somewhere to close the program. */
 	return 1;
 }
 /*******************************************************************************
@@ -114,7 +119,7 @@ int main(void)
 *******************************************************************************/
 void admin_menu(void)
 {
-	printf("\n\n\t Welcome to Administration Controls.\n\n");
+	printf(GREEN"\n\n\t Welcome to Administration Controls.\n\n"RESET);
 	printf("1. Add User\n"
 		   "2. Delete User\n"
 		   "3. Edit User Information\n"
@@ -173,7 +178,7 @@ int task_admin_selector(int total_users, node_t* head)
 				save_file(head);
 				return 2;
 			default:
-			printf("Invalid choice.\n");
+			printf(RED"Invalid choice.\n"RESET);
 		}
 	}
 	return 0;

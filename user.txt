@@ -1,20 +1,11 @@
-›
-›
-Sophie
-Barton
-25111997
-1234567890
-1234 Fake St
-a@a.com
-920.20
-1
+123
 password
-Jane 
-Smith
-01011998
-1234567890
-123 Fake St
-e@e.com
+Kay
+Lowe
+23081997
+1111111111
+123 Quaker St
+d@d.com
 0.00
 1234
 pass
@@ -24,7 +15,7 @@ Wesslan
 1234567890
 1234 Jeff St
 a@a.com
-0.00
+20.00
 123456
 password
 Jane Smith
@@ -34,3 +25,21 @@ Helion
 12346 Jen St
 v@v.com
 0.00
+190
+Password1!
+Kay
+Amith
+12081994
+9999999999
+15 Kay Ave
+c@c.com
+0.00
+12
+Password1
+Jane
+Doe
+12122014
+1234567890
+123 New St
+x@x.com
+180.00

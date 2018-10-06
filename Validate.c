@@ -112,7 +112,7 @@ int is_valid_password (char* password_p)
 }
 
 
-int is_valid_username(node_t* head, char* username)
+int is_valid_username(char* username)
 {
     int length;
 
@@ -126,7 +126,19 @@ int is_valid_username(node_t* head, char* username)
 
             for(i=0; username[i]!='\0'; i++)
             {
-                if(username[i]==' ')
+                if(username[i] >= 'a' && username[i] <= 'z')
+                {
+                    is_valid = FALSE;
+                    break;
+                }
+
+                if(username[i] >= 'A' && username[i] <= 'Z')
+                {
+                    is_valid = FALSE;
+                    break;
+                }
+
+                if(username[i] == ' ')
                 {
                     is_valid = FALSE;
                     break;

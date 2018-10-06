@@ -29,10 +29,10 @@
 node_t* Username(int* total_user, node_t* head)
 {
 	char user[MAX_USER];
-	node_t* found_address=NULL;
+	node_t* found_address = NULL;
 
 	printf("\n\t\t\t Welcome to Bank\n\n");
-	while(found_address==NULL)
+	while(found_address == NULL)
 	{
 		
 		printf("\t Username:");
@@ -41,7 +41,6 @@ node_t* Username(int* total_user, node_t* head)
 		if (strcmp(user, "admin") == 0) /*Hard code admin*/
 		{
 			/*Welcome Administrator*/
-			Admin_Pass(user);
 			return (NULL);/*return when its admin*/
 		}
 
@@ -57,7 +56,6 @@ node_t* Username(int* total_user, node_t* head)
 			else
 			{
 				/*Welcome User*/
-				Password(user, found_address);
 				return(found_address);/*return when is user*/
 			}
 		}
@@ -114,13 +112,14 @@ int Password(char user[], node_t* found_address)
 		else
 		{
 			printf(RED  "\n\n\t Sorry you are locked out.\n\n" RESET);
+			system("clear");
 			fin = 1;	
 		}
 	}
 	return 0;		
 }
 
-int Admin_Pass(char user[])
+int Admin_Pass()
 {
 	char pass[MAX_PASS];
 	int fin = 0;
@@ -157,6 +156,7 @@ int Admin_Pass(char user[])
 		else
 		{
 			printf(RED "\n\t Sorry you are locked out.\n" RESET);
+			system("clear");
 			fin = 1;	
 		}
 	}	

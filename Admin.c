@@ -2,6 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define RED      "\x1B[31m"
+#define GREEN    "\x1B[32m"
+#define YELLOW   "\x1B[33m"
+#define BLUE     "\x1B[34m"
+#define PURPLE   "\x1B[35m"
+#define CYAN     "\x1B[36m"
+#define WHITE    "\x1B[37m"
+#define RESET    "\x1B[0m"
+
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 #include "LinkedList.h"
@@ -38,7 +47,7 @@ void delete_user(node_t* head)
 		{
 			system("clear");
 			print_node(user);
-			printf("Do you want to delete this user? y or n > ");
+			printf(YELLOW"Do you want to delete this user? y or n > "RESET);
 			scanf(" %c", &confirm);
 			if(strcmp(&confirm, "y"))
 			{
@@ -55,7 +64,7 @@ void delete_user(node_t* head)
 
 		else
 		{
-			printf("Please enter a valid choice.\n");
+			printf(RED"Please enter a valid choice.\n"RESET);
 			break;
 		}
 	}
@@ -89,7 +98,7 @@ void edit_user(char* data_type, char* type)
 		}
 		else
 		{
-			printf("Please enter a valid %s.\n\n", type);
+			printf(RED"Please enter a valid %s.\n\n"RESET, type);
 		}
 	}
 
@@ -104,20 +113,21 @@ void edit_user(char* data_type, char* type)
 			system("clear");
 			printf("User's %s has been changed to %s.\n", 
 					type, data_type);
-			printf("---------------------------------\n");
+			\
 			break;
 		}
 
 		else if(confirm == 'n' || confirm == 'N')
 		{
-			printf("Change has been discarded.\n");
-			printf("---------------------------------\n");
+			system("clear");
+			printf(YELLOW"Change has been discarded.\n"RESET);
+			
 			break;
 		}
 
 		else
 		{
-			printf("please enter valid choice.\n");
+			printf(RED"please enter valid choice.\n"RESET);
 		}
 	}	
 }
@@ -132,7 +142,7 @@ void change_password(node_t* head, node_t* node)
 		printf("Enter the new password > ");
 		scanf("%s", placeholder);
 
-		if(is_valid_password(head, placeholder))
+		if(is_valid_password(placeholder))
 		{
 			system("clear");
 			printf("The user's password will changed to %s", 
@@ -141,15 +151,15 @@ void change_password(node_t* head, node_t* node)
 		}
 		else
 		{
-			printf("Please enter a valid password.\n");
+			printf(RED"Please enter a valid password.\n");
 			printf("the password must contain a uppercase "
-				   "lowercase letter and a number.");
+				   "lowercase letter and a number.\n"RESET);
 		}
 	}
 
 	while(1)
 	{
-		printf("\nDo you accept this change? y or n > ");
+		printf(YELLOW"\nDo you accept this change? y or n > "RESET);
 		scanf(" %c", &confirm);
 
 		if(confirm == 'y' || confirm == 'Y')
@@ -158,20 +168,21 @@ void change_password(node_t* head, node_t* node)
 			system("clear");
 			printf("User's password has been changed to %s.\n", 
 					node->user.login.password);
-			printf("---------------------------------\n");
+
 			break;
 		}
 
 		else if(confirm == 'n' || confirm == 'N')
 		{
-			printf("Change has been discarded.\n");
-			printf("---------------------------------\n");
+			system("clear");
+			printf(YELLOW"Change has been discarded.\n"RESET);
+
 			break;
 		}
 
 		else
 		{
-			printf("please enter valid choice.\n");
+			printf(RED"please enter valid choice.\n"RESET);
 		}
 	}	
 }
@@ -196,7 +207,7 @@ int edit_info_menu(node_t* head)
 			node = search_data(head, choice);
 			while(1)
 			{
-				printf("\n\t\t\tUser Information Editor"
+				printf(GREEN"\n\t\t\tUser Information Editor"RESET
 				   "\n1. First Name"
 				   "\n2. Last Name"
 				   "\n3. Date Of Birth"
@@ -242,7 +253,7 @@ int edit_info_menu(node_t* head)
 							}
 							else
 							{
-								printf("Please enter a valid Date of Birth.\n\n");
+								printf(RED"Please enter a valid Date of Birth.\n\n"RESET);
 							}
 						}
 
@@ -269,14 +280,15 @@ int edit_info_menu(node_t* head)
 
 							else if(confirm == 'n' || confirm == 'N')
 							{
-								printf("Change has been discarded.\n");
-								printf("---------------------------------\n");
+								system("clear");
+								printf(YELLOW"Change has been discarded.\n"RESET);
+					
 								break;
 							}
 
 							else
 							{
-								printf("please enter valid choice.\n");
+								printf(RED"please enter valid choice.\n"RESET);
 							}
 						}	
 						break;
@@ -295,13 +307,13 @@ int edit_info_menu(node_t* head)
 							}
 							else
 							{
-								printf("Please enter a valid phone number.\n\n");
+								printf(RED"Please enter a valid phone number.\n\n"RESET);
 							}
 						}
 
 						while(1)
 						{
-							printf("\nDo you accept this change? y or n > ");
+							printf(YELLOW"\nDo you accept this change? y or n > "RESET);
 							scanf(" %c", &confirm);
 
 							if(confirm == 'y' || confirm == 'Y')
@@ -310,20 +322,21 @@ int edit_info_menu(node_t* head)
 								system("clear");
 								printf("User's phone number has been changed to %s.\n", 
 										node->user.phone);
-								printf("---------------------------------\n");
+				;
 								break;
 							}
 
 							else if(confirm == 'n' || confirm == 'N')
 							{
-								printf("Change has been discarded.\n");
-								printf("---------------------------------\n");
+								system("clear");
+								printf(YELLOW"Change has been discarded.\n"RESET);
+			
 								break;
 							}
 
 							else
 							{
-								printf("please enter valid choice.\n");
+								printf(RED"please enter valid choice.\n"RESET);
 							}
 						}	
 						break;
@@ -342,35 +355,35 @@ int edit_info_menu(node_t* head)
 							}
 							else
 							{
-								printf("Please enter a valid email.\n\n");
+								printf(RED"Please enter a valid email.\n\n"RESET);
 							}
 						}
 
 						while(1)
 						{
-							printf("\nDo you accept this change? y or n > ");
+							printf(YELLOW"\nDo you accept this change? y or n > "RESET);
 							scanf(" %c", &confirm);
 
 							if(confirm == 'y' || confirm == 'Y')
 							{
 								strcpy(node->user.email, placeholder);
 								system("clear");
-								printf("User's emial has been changed to %s.\n", 
+								printf("User's email has been changed to %s.\n", 
 										node->user.email);
-								printf("---------------------------------\n");
+				
 								break;
 							}
 
 							else if(confirm == 'n' || confirm == 'N')
 							{
-								printf("Change has been discarded.\n");
-								printf("---------------------------------\n");
+								system("clear");
+								printf(YELLOW"Change has been discarded.\n"RESET);
 								break;
 							}
 
 							else
 							{
-								printf("please enter valid choice.\n");
+								printf(RED"please enter valid choice.\n"RESET);
 							}
 						}	
 						break;
@@ -385,7 +398,7 @@ int edit_info_menu(node_t* head)
 
 						while(1)
 						{
-							printf("\nDo you accept this change? y or n > ");
+							printf(YELLOW"\nDo you accept this change? y or n > "RESET);
 							scanf(" %c", &confirm);
 
 							if(confirm == 'y' || confirm == 'Y')
@@ -394,20 +407,21 @@ int edit_info_menu(node_t* head)
 								system("clear");
 								printf("User's address has been changed to %s.\n", 
 										node->user.address);
-								printf("---------------------------------\n");
+
 								break;
 							}
 
 							else if(confirm == 'n' || confirm == 'N')
 							{
-								printf("Change has been discarded.\n");
-								printf("---------------------------------\n");
+								system("clear");
+								printf(YELLOW"Change has been discarded.\n"RESET);
+						
 								break;
 							}
 
 							else
 							{
-								printf("please enter valid choice.\n");
+								printf(RED"please enter valid choice.\n"RESET);
 							}
 						}	
 
@@ -419,7 +433,7 @@ int edit_info_menu(node_t* head)
 							printf("Enter the new username > ");
 							scanf("%s", placeholder);
 
-							if(is_valid_username(head, placeholder))
+							if(is_valid_username(placeholder))
 							{
 								system("clear");
 								printf("The user's username will change from %s to %s", 
@@ -428,13 +442,13 @@ int edit_info_menu(node_t* head)
 							}
 							else
 							{
-								printf("Please enter a valid username.\n\n");
+								printf(RED"Please enter a valid username.\n\n"RESET);
 							}
 						}
 
 						while(1)
 						{
-							printf("\nDo you accept this change? y or n > ");
+							printf(YELLOW"\nDo you accept this change? y or n > "RESET);
 							scanf(" %c", &confirm);
 
 							if(confirm == 'y' || confirm == 'Y')
@@ -443,20 +457,21 @@ int edit_info_menu(node_t* head)
 								system("clear");
 								printf("User's username has been changed to %s.\n", 
 										node->user.login.username);
-								printf("---------------------------------\n");
+				
 								break;
 							}
 
 							else if(confirm == 'n' || confirm == 'N')
 							{
-								printf("Change has been discarded.\n");
-								printf("---------------------------------\n");
+								system("clear");
+								printf(YELLOW"Change has been discarded.\n"RESET);
+				
 								break;
 							}
 
 							else
 							{
-								printf("please enter valid choice.\n");
+								printf(RED"please enter valid choice.\n"RESET);
 							}
 						}	
 
@@ -470,7 +485,7 @@ int edit_info_menu(node_t* head)
 					case 0:
 						return 1;
 					default:
-						printf("Invalid choice.\n");
+						printf(RED"Invalid choice.\n"RESET);
 				}
 			}
 		}
@@ -499,6 +514,7 @@ void view_user_info(node_t* head)
 		if(!(strcmp(choice, "*")))
 		{
 			print_all_nodes(head);
+			printf("Press enter to continue.");
 			while (getchar()!='\n');
 			break;
 		}
@@ -507,6 +523,7 @@ void view_user_info(node_t* head)
 		{
 			user = search_data(head, choice);
 			print_node(user);
+			printf("Press enter to continue.");
 			while (getchar()!='\n');
 			break;
 		}

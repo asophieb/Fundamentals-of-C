@@ -2,12 +2,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_FIRSTNAME_LEN 30
-#define MAX_LASTNAME_LEN 256
-#define MAX_EMAIL_LEN 256
-#define MAX_ADDRESS_LEN 256
-#define MAX_USERNAME_LEN 10
-#define MAX_PHONE_LEN 10
+#define RED      "\x1B[31m"
+#define GREEN    "\x1B[32m"
+#define YELLOW   "\x1B[33m"
+#define BLUE     "\x1B[34m"
+#define PURPLE   "\x1B[35m"
+#define CYAN     "\x1B[36m"
+#define WHITE    "\x1B[37m"
+#define RESET    "\x1B[0m"
 
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
@@ -24,29 +26,32 @@
 #include "Validate.h"
 #endif
 
+#define TRUE 1
+#define FALSE 0
 
 /*******************************************************************************
- * Author: Rohan
- * This function creates a new user and add to the linked list .
+ * This function adds a user in RAM with all instructions on how to use
+ * this program.
  * inputs:
- * - pointer to first node, number of users
+ * - users_t* temp_user ; points to the elements of users array
+ * - int total_users; stores the number of flights currently stored in
+ *   users array
  * outputs:
- * - ppinter to first node
+ * - none
 *******************************************************************************/
-
 node_t* add_user(node_t* head, int* total_users)
 {
     system("clear");
 
-    printf("Please provide the following personal information\n\n"
-           "----------------------------------------------------\n");
+    printf(CYAN"Please provide the following personal information\n\n"
+           "----------------------------------------------------\n"RESET);
 
     user_t temp_user;
 
     /* Get First Name */
     while(1)
     {
-        printf("First Name>\n");
+        printf(GREEN"\nFirst Name>\n"RESET);
 
         scanf("%[^\n]", temp_user.first_name);
 
@@ -59,13 +64,13 @@ node_t* add_user(node_t* head, int* total_users)
             break;
         }
 
-        printf("Invalid input. Do not enter any symbol.\n");
+        printf(RED"Invalid input.\n"RESET);
     }
 
     /* Get Last Name */
     while(1)
     {
-        printf("Last Name>\n");
+        printf(GREEN"\nLast Name>\n"RESET);
 
         scanf("%[^\n]", temp_user.last_name);
 
@@ -73,18 +78,18 @@ node_t* add_user(node_t* head, int* total_users)
         while (getchar()!='\n');
 
         /* validate last name */
-        if(is_valid_name(temp_user.last_name) == TRUE)
+        if(is_valid_name(temp_user.last_name)==TRUE)
         {
             break;
         }
 
-        printf("Invalid input. Do not enter any symbol\n");
+        printf(RED"Invalid input.\n"RESET);
     }
 
     /* Get DOB */
     while(1)
     {
-        printf("DOB (dd/mm/yyyy)>\n");
+        printf(GREEN"\nDOB (dd/mm/yyyy)>\n"RESET);
 
         scanf("%d/%d/%d", &temp_user.DOB.day,
                           &temp_user.DOB.month,
@@ -101,16 +106,16 @@ node_t* add_user(node_t* head, int* total_users)
             break;
         }
 
-        printf("Invalid input\n");
+        printf(RED"Invalid input.\n"RESET);
     }
 
 
     /* Get Phone Number */
     while(1)
     {
-        printf("Phone>\n");
+        printf(GREEN"\nPhone>\n"RESET);
 
-        scanf("%s", temp_user.phone);
+        scanf("%[^\n]", temp_user.phone);
 
         /* clears the input buffer */
         while (getchar()!='\n');
@@ -121,13 +126,13 @@ node_t* add_user(node_t* head, int* total_users)
             break;
         }
 
-        printf("Invalid input\n");
+        printf(RED"Invalid input.\n"RESET);
     }
 
     /* Get Email */
     while(1)
     {
-        printf("Email>\n");
+        printf(GREEN"\nEmail>\n"RESET);
 
         scanf("%[^\n]", temp_user.email);
 
@@ -140,71 +145,94 @@ node_t* add_user(node_t* head, int* total_users)
             break;
         }
 
-        printf("Invalid input\n");
+        printf(RED"Invalid input.\n"RESET);
     }
 
     /* Get Address */
     while(1)
     {
-        printf("Address>\n");
+        printf(GREEN"\nAddress>\n"RESET);
 
         scanf("%[^\n]", temp_user.address);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        /* validate address */
+        /* Checks Address if field is empty */
+        if(temp_user.address[0]!='\0')
+            break;
 
-        break;
-        
+        printf(RED"Invalid input.\n"RESET);
     }
 
     system("clear");
 
-    printf("Please input the Username and Password\n\n"
-           "----------------------------------------\n\n");
+    printf(CYAN"Please select a Username and Password\n\n"
+           "-----------------------------------------------------\n"RESET);
 
+    printf(YELLOW"\nUsername must have\n"
+           "  1) at most 10 characters\n"
+           "  2) no spaces in between\n"
+           "  3) only consist of digits\n"RESET);
+
+    printf(YELLOW"\nPassword must have\n"
+           "  1) at least 8 characters\n"
+           "  2) combination of uppercase and lowercase letters\n"
+           "  3) at least one digit\n"RESET);
+
+
+    /* Get Username */
     while(1)
     {
-        printf("\tUsername: ");
-        scanf("%s", temp_user.login.username);
+        printf(GREEN"\n\tUsername: "RESET);
+        scanf("%[^\n]", temp_user.login.username);
 
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        if(is_valid_username(head, temp_user.login.username) == TRUE)
+        /* search for duplicates */
+        if(is_valid_username(temp_user.login.username)==TRUE)
+        {
+            if(search_data(head, temp_user.login.username)==NULL)
+            {
+                break;
+            }
+
+            printf(RED"\tThis username is already in use.\n"RESET);
+        }
+
+        printf(RED"\tInvalid username\n"RESET);
+    }
+
+
+    /* Get Password */
+    while(1)
+    {
+        printf(GREEN"\n\tPassword: "RESET);
+        scanf("%[^\n]", temp_user.login.password);
+
+        /* clears the input buffer */
+        while (getchar()!='\n');
+
+        /* check for password validity */
+        if(is_valid_password(temp_user.login.password) == TRUE)
         {
             break;
         }
 
-        printf("This username is not valid.\n");
+        printf(RED"\tPassword is too weak.\n"RESET);
     }
 
-    while(1)
-    {
-        printf("\tPassword: ");
-        scanf("%s", temp_user.login.password);
-
-        /* clears the input buffer */
-        while (getchar()!='\n');
-
-        is_valid_password(temp_user.login.password);
-
-        break;
-
-        printf("Password must be 8-10 characters long!");
-    }
-
-    /* creates a new balance account with balance $0.00 */
+    /* creates a new balance account with initial balance $0.00 */
 
     system("clear");
 
     temp_user.balance=0.00;
 
-    printf("User %s has been created successfully!\n", temp_user.first_name);
+    printf(YELLOW"User %s has been created successfully!\n", temp_user.first_name);
     printf("\nAccount Details:\n\n");
-    printf("\tAccount Type: Balance\n\tNet Balance: $%.2f\n", temp_user.balance);
-    printf("\n\n\n\n\nPress Enter to continue...");
+    printf("\tAccount Type: Balance\n\tNet Balance: $%.2f\n"RESET, temp_user.balance);
+    printf(GREEN"\n\n\n\nPress Enter to continue..."RESET);
 
     if(*(total_users)==0)
         head=create_head(temp_user);
@@ -214,7 +242,7 @@ node_t* add_user(node_t* head, int* total_users)
 
     ++*(total_users);
 
-    while (getchar()!='\n');
+    while (getchar()!='\n'); /* waits for the user to press Enter to exit */
 
     return head;
 }
