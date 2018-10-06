@@ -172,12 +172,12 @@ node_t* add_user(node_t* head, int* total_users)
         /* clears the input buffer */
         while (getchar()!='\n');
 
-        if(is_valid_username(temp_user.login.username) == TRUE)
+        if(is_valid_username(head, temp_user.login.username) == TRUE)
         {
             break;
         }
 
-        printf("This username is already taken!\n");
+        printf("This username is not valid.\n");
     }
 
     while(1)

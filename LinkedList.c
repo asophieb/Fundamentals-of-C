@@ -195,6 +195,7 @@ node_t* search_data (node_t* head, char* search_username)
 
 void print_struct (user_t user)
 {
+    printf("---------------------------------\n");
     printf("Username: %s\n", user.login.username); 
     printf("First name: %s\n", user.first_name);
     printf("Last name: %s\n", user.last_name);
@@ -202,6 +203,7 @@ void print_struct (user_t user)
     printf("Phone: %s\n", user.phone);
     printf("Email: %s\n", user.email);
     printf("Address: %s\n", user.address);
+    printf("---------------------------------\n");
 }
 
 /*******************************************************************************
@@ -226,6 +228,7 @@ void print_all_nodes (node_t* head)
 
         PRINT:
         print_struct(current->user);
+        
 
     }
 

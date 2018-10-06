@@ -5,6 +5,11 @@
 #include "Validate.h"
 #endif
 
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
+#include "LinkedList.h"
+#endif
+
 int is_valid_DOB (int day, int month, int year)
 {
     /* 'is_valid' is used as flag to check error */
@@ -107,7 +112,7 @@ int is_valid_password (char* password_p)
 }
 
 
-int is_valid_username(char* username)
+int is_valid_username(node_t* head, char* username)
 {
     int length;
 
@@ -115,21 +120,21 @@ int is_valid_username(char* username)
 
     for(length=0; length!='\0'; length++);
 
-    if(length<=10)
-    {
-        int i;
-
-        for(i=0; username[i]!='\0'; i++)
+        if(length<=10)
         {
-            if(username[i]==' ')
-            {
-                is_valid=FALSE;
-                break;
-            }
+            int i;
 
-            is_valid=TRUE;
+            for(i=0; username[i]!='\0'; i++)
+            {
+                if(username[i]==' ')
+                {
+                    is_valid = FALSE;
+                    break;
+                }
+
+                is_valid = TRUE;
+            }
         }
-    }
 
     return is_valid;
 }

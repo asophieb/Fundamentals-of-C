@@ -61,16 +61,16 @@ int main(void)
 	head = (node_t*) malloc(sizeof(node_t));
 
 	int total_users = 0;
-	load_file(&total_users);
+	head = load_file(&total_users);
 	system("clear");
 
 	/* int close = 0; for the task selectors. */
 	while(1)
 	{
 		/*if admin log in. */
+		node = Username(&total_users, head);
 
-
-		if(Username(&total_users, head) == NULL)
+		if(node == NULL)
 		{
 
 			if(task_admin_selector(total_users, head) == 2)
@@ -81,7 +81,6 @@ int main(void)
 		}
 		else
 		{
-			node = Username(&total_users, head);
 			if(task_user_selector(total_users, head, node) == 2)
 			{
 				break;
@@ -90,7 +89,7 @@ int main(void)
 
 	}
 	
-	save_file(head);
+	
 
 	/*  something = task_admin_selector ()*/
 	
@@ -151,12 +150,15 @@ int task_admin_selector(int total_users, node_t* head)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
 				head = add_user(head, &total_users);
+				save_file(head);
 				break;
 			case 2: 
 				delete_user(head);
+				save_file(head);
 				break;
 			case 3: 
-				edit_info(head);
+				edit_info_menu(head);
+				save_file(head);
 				break;
 			case 4: 
 				
@@ -165,8 +167,10 @@ int task_admin_selector(int total_users, node_t* head)
 				view_user_info(head);
 				break;
 			case 6:
+				save_file(head);
 				return 0;
 			case 7: 
+				save_file(head);
 				return 2;
 			default:
 			printf("Invalid choice.\n");
@@ -192,9 +196,10 @@ void user_menu(void)
 		   "3. Funds Transfer\n"
 		   "4. View Balance\n"
 		   "5. View Personal Info\n"
-		   "6. Log Off\n"
-		   "7. Exit Program\n"
-		   "Enter choice (Between 1-7)>\n");
+		   "6. Change Password\n"
+		   "7. Log Off\n"
+		   "8. Exit Program\n"
+		   "Enter choice (Between 1-8)>\n");
 }
 /*******************************************************************************
  * Author: Owen, Sophie
@@ -219,25 +224,31 @@ int task_user_selector(int total_users, node_t* head, node_t* node)
 		switch (i)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
-
+				deposit(node);
 				break;
 			case 2: 
-				
+				withdraw(node);
 				break;
 			case 3: 
-				
+				transfer(head, node);
 				break;
 			case 4: 
 				system("clear");
-
-				printf("Your balance is currently %lf", node->user.balance);
+				printf("-------------------------------------\n"	
+					   "Your balance is currently $%.2lf\n", node->user.balance);
+				printf("-------------------------------------\n");
 				break;
 			case 5: 
 				print_struct(node->user);
 				break;
 			case 6:
-				return 0;
-			case 7: 
+				change_password(head, node);
+				break;
+			case 7:
+				save_file(head);
+				return 0;	
+			case 8: 
+				save_file(head);
 				return 2;
 			default:
 				printf("Invalid choice.\n");
