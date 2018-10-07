@@ -33,9 +33,7 @@ int is_valid_name(char* name_p)
 
     for(i=0; name_p[i]!='\0'; i++)
     {
-        if(!((name_p[i]>='A' && name_p[i]<='Z') ||
-             (name_p[i]>='a' && name_p[i]<='z') ||
-              name_p[i]==' '))
+        if(!(name_p[i] == ' '))
         {
             is_valid=FALSE;
             break;

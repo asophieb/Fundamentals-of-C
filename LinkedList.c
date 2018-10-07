@@ -279,6 +279,8 @@ void save_file(node_t* head)
 {
     FILE *fp;
 
+    user_t encrypted_user;
+
     fp = fopen (DATABASE, "w");
 
     if(fp==NULL)
@@ -295,7 +297,8 @@ void save_file(node_t* head)
             current=current->next;
 
             SAVE:
-            save_node(fp, current);
+            /*encrypted_user=encrypt(current->user); */
+            save_node(fp, encrypted_user);
 
         }
      }
@@ -311,9 +314,8 @@ void save_file(node_t* head)
  * outputs:
  * - pointer to head
 *******************************************************************************/
-
 /* returns the head of the linked list */
-node_t* load_file (int* total_users)
+node_t* load_file(int* total_users)
 {
     FILE *fp;
 
@@ -325,12 +327,8 @@ node_t* load_file (int* total_users)
 
     head=(node_t*) malloc(sizeof(node_t));
 
-    if(fp==NULL)
-        printf("Read Error!\n");
-
-    else
+    if(fp!=NULL)
     {
-
         *total_users=0;
 
         while(fgetc(fp)!=EOF)
@@ -351,8 +349,10 @@ node_t* load_file (int* total_users)
             fscanf(fp, "%[^\n]\n", user.email);
             fscanf(fp, "%f\n", &user.balance);
 
+            /*user = encrypt(user); */
+
             if(*(total_users)==0)
-                head=create_head(user);
+                head = create_head(user);
 
             else
                 insert_node(head, user);
@@ -360,11 +360,12 @@ node_t* load_file (int* total_users)
 
             ++*(total_users);
         }
-    }
 
-    fclose(fp);
+        fclose(fp);
+    }
 
     return head;
 }
+
 
 
