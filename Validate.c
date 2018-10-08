@@ -1,8 +1,6 @@
-#include <string.h>
+#include "Validate.h"
 
-#include "LinkedList.h"
-
-int is_valid_DOB (int day, int month, int year)
+int is_valid_DOB (const int day, const int month, const int year)
 {
     /* 'is_valid' is used as flag to check error */
     int is_valid=FALSE;
@@ -11,34 +9,25 @@ int is_valid_DOB (int day, int month, int year)
        day>=1 && day<=31 &&
        year>=1900 && year<=2090)
     {
-        is_valid=TRUE;
+        is_valid = TRUE;
     }
 
     return is_valid;
 }
 
-int is_valid_name(char* name_p)
+int is_valid_name(const char* name_p)
 {
     int i; /* counter */
-
-    int is_valid=FALSE; /* used as flag to check error */
-
-    for(i=0; name_p[i]!='\0'; i++)
+    for(i = 0; name_p[i] != '\0'; i++)
     {
-        if(!(name_p[i] == ' '))
-        {
-            is_valid=FALSE;
-            break;
-        }
-
-        is_valid=TRUE;
+        if (name_p[i] == ' ')
+            return FALSE;
     }
-
-    return is_valid;
+    return TRUE;
 }
 
 
-int is_valid_phone(char* phone_p)
+int is_valid_phone(const char* phone_p)
 {
     int i; /* counter */
 
@@ -66,7 +55,7 @@ int is_valid_phone(char* phone_p)
     return is_valid;
 }
 
-int is_valid_password (char* password_p)
+int is_valid_password (const char* password_p)
 {
     int i; /* counter */
 
@@ -102,7 +91,7 @@ int is_valid_password (char* password_p)
 }
 
 
-int is_valid_username(char* username)
+int is_valid_username(const char* username)
 {
     int length;
 
@@ -141,7 +130,7 @@ int is_valid_username(char* username)
     return is_valid;
 }
 
-int is_valid_email(char* email)
+int is_valid_email(const char* email)
 {
     int is_valid=FALSE;
 

@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
 #include "AddUser.h"
 
 #define RED      "\x1B[31m"
@@ -36,7 +32,7 @@ node_t* add_user(node_t* head, int* total_users)
     user_t temp_user;
 
     /* Get First Name */
-    while(1)
+    while (1)
     {
         printf(GREEN"\nFirst Name>\n"RESET);
 
@@ -46,7 +42,7 @@ node_t* add_user(node_t* head, int* total_users)
         while (getchar()!='\n');
 
         /* validate first name */
-        if(is_valid_name(temp_user.first_name)==TRUE)
+        if (is_valid_name(temp_user.first_name) == TRUE)
         {
             break;
         }
@@ -65,7 +61,7 @@ node_t* add_user(node_t* head, int* total_users)
         while (getchar()!='\n');
 
         /* validate last name */
-        if(is_valid_name(temp_user.last_name)==TRUE)
+        if (is_valid_name(temp_user.last_name) == TRUE)
         {
             break;
         }
@@ -74,7 +70,7 @@ node_t* add_user(node_t* head, int* total_users)
     }
 
     /* Get DOB */
-    while(1)
+    while (1)
     {
         printf(GREEN"\nDOB (dd/mm/yyyy)>\n"RESET);
 

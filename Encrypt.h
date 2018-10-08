@@ -1,6 +1,9 @@
 #ifndef ENCRYPT_H
 #define ENCRYPT_H
 
+#include <string.h>
+#include <stdio.h>
+
 #include "LinkedList.h"
 
 char* XOR(char* string, char key);

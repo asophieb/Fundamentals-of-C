@@ -1,10 +1,3 @@
-/*********************************
-    Bidirectional Linked List
-*********************************/
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
 #include "LinkedList.h"
 
 /*******************************************************************************
@@ -170,7 +163,7 @@ node_t* find_node (node_t* head, char* search_username)
  * outputs:
  * - none
 *******************************************************************************/
-void print_user (user_t user)
+void print_user (const user_t user)
 {
     printf("---------------------------------\n");
     printf("Username: %s\n", user.login.username); 

@@ -1,6 +1,10 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 #define MAX_FIRSTNAME_LEN 30
 #define MAX_LASTNAME_LEN 256
 #define MAX_EMAIL_LEN 256
@@ -47,7 +51,7 @@ node_t* remove_head (node_t* current_head);
 void remove_tail (node_t* current_tail);
 node_t* remove_node (node_t* current_head, node_t* to_be_deleted);
 node_t* find_node (node_t* head, char* search_username);
-void print_user (user_t user);
+void print_user (const user_t user);
 void print_all_users (node_t* head);
 
 #endif

@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
 #include "Login.h"
 
 #define MAX_USERNAME 10
@@ -29,7 +25,7 @@
  * outputs:
  * - null if admin, otherwise a pointer to the user.
 *******************************************************************************/
-node_t* login(const node_t* head)
+node_t* login(node_t* head)
 {
     char username[MAX_USERNAME];
     node_t* node = NULL;
@@ -62,9 +58,9 @@ node_t* login(const node_t* head)
     return 0;
 }
 
-int user_password(node_t* node)
+int user_password(const node_t* node)
 {
-    char pass[MAX_PASS];
+    char pass[MAX_PASSWORD];
     int exit = 0;
     /*printf("%s\n", saved_password );*/
 
@@ -76,15 +72,10 @@ int user_password(node_t* node)
         system("stty echo"); /* Turn echoing of characters back on */
 
         /*User password compare*/
-        if(strcmp(node->user.login.password, pass, 10) != 0) 
+        if(strcmp(node->user.login.password, pass) != 0) 
         {
             printf(RED "\n\n\t *Wrong Password*\n\n" RESET);
             printf("\t Attempt %d\n",exit);
-            
-            printf("\t Re-Enter Password:");
-            system("stty -echo"); /* Turns off character display */
-            scanf("%s",pass);
-            system("stty echo"); /* Turn echoing of characters back on */
             exit++;
         }
         else
@@ -112,16 +103,11 @@ int admin_password()
         scanf("%s",pass);
         system("stty echo"); /* Turn echoing of characters back on */
         
-        if(strcmp(ADMIN_PASSWORD, pass, 10) != 0)/*Admin password compear*/
+        if(strcmp(ADMIN_PASSWORD, pass) != 0)/*Admin password compear*/
         {
             exit++;
             printf(RED "\n\n\t *Wrong Password*\n\n" RESET);
             printf("\t Attempt %d\n",exit);
-            
-            printf("\t Re-Enter Password:");
-            system("stty -echo"); /* Turns off character display */
-            scanf("%s",pass);
-            system("stty echo"); /* Turn echoing of characters back on */
         }
         else
             return 1; /* return 1 when admin signed in */

@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-#include "LinkedList.h"
+#include "User.h"
 
 /*******************************************************************************
  * Author: Sophie
@@ -134,7 +130,7 @@ void transfer(node_t* head, node_t* node)
  * outputs:
  * - none
 *******************************************************************************/
-void save_user(FILE* fp, user_t user)
+void save_user(FILE* fp, const user_t user)
 {
     fprintf(fp,"%s\n", user.login.username);
     fprintf(fp,"%s\n", user.login.password);

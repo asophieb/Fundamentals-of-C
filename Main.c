@@ -9,6 +9,12 @@ git git add . --> git commit -m "comment" --> git push origin master  as, 1!
 #include <string.h>
 #include <stdlib.h>
 
+#include "LinkedList.h"
+#include "AddUser.h"
+#include "Login.h"
+#include "User.h"
+#include "Admin.h"
+
 #define RED      "\x1B[31m"
 #define GREEN    "\x1B[32m"
 #define YELLOW   "\x1B[33m"
@@ -17,12 +23,6 @@ git git add . --> git commit -m "comment" --> git push origin master  as, 1!
 #define CYAN     "\x1B[36m"
 #define WHITE    "\x1B[37m"
 #define RESET    "\x1B[0m"
-
-#include "LinkedList.h"
-#include "AddUser.h"
-#include "Login.h"
-#include "User.h"
-#include "Admin.h"
 
 /*******************************************************************************
  * Function prototypes
