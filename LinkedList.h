@@ -1,6 +1,5 @@
-#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
-#endif
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
 #define MAX_FIRSTNAME_LEN 30
 #define MAX_LASTNAME_LEN 256
@@ -9,7 +8,6 @@
 #define MAX_USERNAME_LEN 10
 #define MAX_PHONE_LEN 10
 #define MAX_PASSWORD_LEN 10
-#define DATABASE "user.txt"
 
 typedef struct DOB
 {
@@ -24,7 +22,7 @@ typedef struct login
     char password [MAX_PASSWORD_LEN+1];
 } login_t;
 
-typedef struct users
+typedef struct user
 {
     login_t login;
     char first_name[MAX_FIRSTNAME_LEN+1];
@@ -48,12 +46,8 @@ node_t* insert_node (node_t* head, user_t new_user);
 node_t* remove_head (node_t* current_head);
 void remove_tail (node_t* current_tail);
 node_t* remove_node (node_t* current_head, node_t* to_be_deleted);
-node_t* search_data (node_t* head, char* search_username);
-void print_struct (user_t user);
-void print_all_nodes (node_t* head);
-void print_node (node_t* to_be_printed);
-void save_node(FILE* fp, node_t* node);
-void save_file(node_t* head);
-node_t* load_file (int* total_users);
+node_t* find_node (node_t* head, char* search_username);
+void print_user (user_t user);
+void print_all_users (node_t* head);
 
-
+#endif

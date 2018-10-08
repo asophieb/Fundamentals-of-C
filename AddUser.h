@@ -1,12 +1,8 @@
 #ifndef ADD_USER_H
 #define ADD_USER_H
-#include "LinkedList.h"
-#endif
 
-#ifndef VALIDATE_H
-#define VALIDATE_H
+#include "LinkedList.h"
 #include "Validate.h"
-#endif
 
 #define RED      "\x1B[31m"
 #define GREEN    "\x1B[32m"
@@ -19,4 +15,4 @@
 
 node_t* add_user(node_t* head, int* total_users);
 
-
+#endif

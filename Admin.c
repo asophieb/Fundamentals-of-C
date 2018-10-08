@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "Admin.h"
+
 #define RED      "\x1B[31m"
 #define GREEN    "\x1B[32m"
 #define YELLOW   "\x1B[33m"
@@ -10,16 +12,6 @@
 #define CYAN     "\x1B[36m"
 #define WHITE    "\x1B[37m"
 #define RESET    "\x1B[0m"
-
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
-#include "LinkedList.h"
-#endif
-
-#ifndef VALIDATE_H
-#define VALIDATE_H
-#include "Validate.h"
-#endif
 
 /*******************************************************************************
  * Author: Sophie
@@ -32,26 +24,26 @@
 
 void delete_user(node_t* head)
 {
-	char choice[MAX_USERNAME_LEN];
+	char username[MAX_USERNAME_LEN];
 	char confirm;
-	node_t* user;
+	node_t* node;
 
 	while(1)
 	{
 		system("clear");
 		printf("Enter the user ID of the user to be deleted > ");
-		scanf("%s", choice);
-		user = search_data(head, choice);
+		scanf("%s", username);
+		node = find_node(head, username);
 
-		if(user != NULL)
+		if(node != NULL)
 		{
 			system("clear");
-			print_node(user);
+			print_user(node->user);
 			printf(YELLOW"Do you want to delete this user? y or n > "RESET);
 			scanf(" %c", &confirm);
 			if(strcmp(&confirm, "y"))
 			{
-				remove_node(head, user);
+				remove_node(head, node);
 				system("clear");
 				break;
 			}
@@ -201,10 +193,9 @@ int edit_info_menu(node_t* head)
 		printf("Enter the user ID of the user to be edited > ");
 		scanf("%s", choice);
 		
-
-		if(search_data(head, choice) != NULL)
+		if(find_node(head, choice) != NULL)
 		{
-			node = search_data(head, choice);
+			node = find_node(head, choice);
 			while(1)
 			{
 				printf(GREEN"\n\t\t\tUser Information Editor"RESET
@@ -480,7 +471,7 @@ int edit_info_menu(node_t* head)
 						change_password(head, node);
 						break;
 					case 9:
-						print_struct(node->user);
+						print_user(node->user);
 						break; 
 					case 0:
 						return 1;
@@ -500,10 +491,8 @@ int edit_info_menu(node_t* head)
  * outputs:
  * - none
 *******************************************************************************/
-
 void view_user_info(node_t* head)
 {
-	node_t* user;
 	char choice[MAX_USERNAME_LEN];
 
 	while(1)
@@ -513,22 +502,22 @@ void view_user_info(node_t* head)
 
 		if(!(strcmp(choice, "*")))
 		{
-			print_all_nodes(head);
+			print_all_users(head);
 			printf("Press enter to continue.");
 			while (getchar()!='\n');
 			break;
 		}
 
-		else if(search_data(head, choice) != NULL)
+		else if(find_node(head, choice) != NULL)
 		{
-			user = search_data(head, choice);
-			print_node(user);
+			node_t* node = find_node(head, choice);
+			print_user(node->user);
 			printf("Press enter to continue.");
 			while (getchar()!='\n');
 			break;
 		}
 
-		else if(search_data(head, choice) == NULL)
+		else if(find_node(head, choice) == NULL)
 		{
 			printf("Please enter a valid user.\n");
 		}

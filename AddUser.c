@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "AddUser.h"
+
 #define RED      "\x1B[31m"
 #define GREEN    "\x1B[32m"
 #define YELLOW   "\x1B[33m"
@@ -10,21 +12,6 @@
 #define CYAN     "\x1B[36m"
 #define WHITE    "\x1B[37m"
 #define RESET    "\x1B[0m"
-
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
-#include "LinkedList.h"
-#endif
-
-#ifndef ADD_USER_H
-#define ADD_USER_H
-#include "AddUser.h"
-#endif
-
-#ifndef VALIDATE_H
-#define VALIDATE_H
-#include "Validate.h"
-#endif
 
 #define TRUE 1
 #define FALSE 0
@@ -193,7 +180,7 @@ node_t* add_user(node_t* head, int* total_users)
         /* search for duplicates */
         if(is_valid_username(temp_user.login.username)==TRUE)
         {
-            if(search_data(head, temp_user.login.username)==NULL)
+            if(find_node(head, temp_user.login.username)==NULL)
             {
                 break;
             }

@@ -18,30 +18,11 @@ git git add . --> git commit -m "comment" --> git push origin master  as, 1!
 #define WHITE    "\x1B[37m"
 #define RESET    "\x1B[0m"
 
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
 #include "LinkedList.h"
-#endif
-
-#ifndef ADD_USER_H
-#define ADD_USER_H
 #include "AddUser.h"
-#endif
-
-#ifndef LOGIN_H
-#define LOGIN_H
 #include "Login.h"
-#endif
-
-#ifndef USER_H
-#define USER_H
 #include "User.h"
-#endif
-
-#ifndef ADMIN_H
-#define ADMIN_H
 #include "Admin.h"
-#endif
 
 /*******************************************************************************
  * Function prototypes
@@ -52,11 +33,7 @@ int task_admin_selector(int total_users, node_t* head);
 int task_user_selector(int total_users, node_t* head, node_t* node);
 
 /*******************************************************************************
- * Structures
-*******************************************************************************/
-
-/*******************************************************************************
- * Author: Owen, Sophie
+ * Author: Sophie, Owen
  * Main
 *******************************************************************************/
 int main(void)
@@ -70,44 +47,40 @@ int main(void)
 	head = (node_t*) malloc(sizeof(node_t));
 
 	int total_users = 0;
-	head = load_file(&total_users);
+	head = load_users(&total_users);
 	system("clear");
 
-	/* int close = 0; for the task selectors. */
+	/* login process, loops each time there's a log out, breaks on exit code */
 	while(1)
 	{
-		/*if admin log in. */
-		node = Username(&total_users, head);
+		node = login(head);
 
 		if(node == NULL)
 		{
-			if(Admin_Pass() != 0)
+			if(admin_password() != 0)
 			{
-				if(task_admin_selector(total_users, head) == 2)
+				if(task_admin_selector(total_users, head) == 1)
 				{
 					system("clear");
 					break;
 				}
 			}
-			
 		}
-
 		else
 		{
-			if(Password(node->user.login.username, node) != 0)
+			if(user_password(node) != 0)
 			{
-				if(task_user_selector(total_users, head, node) == 2)
+				if(task_user_selector(total_users, head, node) == 1)
 				{
 					system("clear");
 					break;
 				}
 			}
 		}
-
 	}
-
-	return 1;
+	return 0;
 }
+
 /*******************************************************************************
  * Author: Owen
  * This function prints the admin menu with instructions on how to use
@@ -131,12 +104,13 @@ void admin_menu(void)
 }
 
 /*******************************************************************************
- * Author: Owen, Sophie
+ * Author: Sophie
  * This function switches between tasks for the admin side of the program.
  * inputs:
- * - none
+ * - total count of users
+ * - head of the user list
  * outputs:
- * - none
+ * - 1 for program exit, 0 for log out
 *******************************************************************************/
 int task_admin_selector(int total_users, node_t* head)
 {
@@ -155,28 +129,28 @@ int task_admin_selector(int total_users, node_t* head)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
 				head = add_user(head, &total_users);
-				save_file(head);
+				save_users(head);
 				break;
 			case 2: 
 				delete_user(head);
-				save_file(head);
+				save_users(head);
 				break;
 			case 3: 
 				edit_info_menu(head);
-				save_file(head);
+				save_users(head);
 				break;
 			case 4: 
-				
+				/* TODO: View transaction logs */
 				break;
 			case 5: 
 				view_user_info(head);
 				break;
 			case 6:
-				save_file(head);
+				save_users(head);
 				return 0;
 			case 7: 
-				save_file(head);
-				return 2;
+				save_users(head);
+				return 1;
 			default:
 			printf(RED"Invalid choice.\n"RESET);
 		}
@@ -206,13 +180,14 @@ void user_menu(void)
 		   "8. Exit Program\n"
 		   "Enter choice (Between 1-8)>\n");
 }
+
 /*******************************************************************************
- * Author: Owen, Sophie
+ * Author: Sophie, Owen
  * This function switches between tasks for the user side of the program.
  * inputs:
  * - none
  * outputs:
- * - none
+ * - 1 for program exit, 0 for log out
 *******************************************************************************/
 int task_user_selector(int total_users, node_t* head, node_t* node)
 {	
@@ -244,17 +219,17 @@ int task_user_selector(int total_users, node_t* head, node_t* node)
 				printf("-------------------------------------\n");
 				break;
 			case 5: 
-				print_struct(node->user);
+				print_user(node->user);
 				break;
 			case 6:
 				change_password(head, node);
 				break;
 			case 7:
-				save_file(head);
+				save_users(head);
 				return 0;	
 			case 8: 
-				save_file(head);
-				return 2;
+				save_users(head);
+				return 1;
 			default:
 				printf("Invalid choice.\n");
 		}
