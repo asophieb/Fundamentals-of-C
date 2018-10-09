@@ -472,6 +472,13 @@ void edit_info_menu(node_t* head)
                         printf(RED"Invalid choice.\n"RESET);
                 }
             }
+        
+        }
+        else
+        {
+            system("clear");
+            printf("Invalid User.");
+            break; 
         }
     }
 }
@@ -493,11 +500,16 @@ void view_user_info(node_t* head)
         printf("Enter the User ID of a specific user or press * to print all > ");
         scanf("%s", choice);
 
-        if(!(strcmp(choice, "*")))
+       if(head == NULL)
+       {
+            system("clear");
+            printf("There are currently no users stored.");
+            break;
+       }
+
+        else if(!(strcmp(choice, "*")))
         {
             print_all_users(head);
-            printf("Press enter to continue.");
-            while (getchar()!='\n');
             break;
         }
 
@@ -505,8 +517,6 @@ void view_user_info(node_t* head)
         {
             node_t* node = find_node(head, choice);
             print_user(node->user);
-            printf("Press enter to continue.");
-            while (getchar()!='\n');
             break;
         }
 

@@ -18,12 +18,23 @@ int is_valid_DOB (const int day, const int month, const int year)
 int is_valid_name(const char* name_p)
 {
     int i; /* counter */
-    for(i = 0; name_p[i] != '\0'; i++)
+
+    int is_valid=FALSE; /* used as flag to check error */
+
+    for(i=0; name_p[i]!='\0'; i++)
     {
-        if (name_p[i] == ' ')
-            return FALSE;
+        if(!((name_p[i]>='A' && name_p[i]<='Z') ||
+             (name_p[i]>='a' && name_p[i]<='z') ||
+              name_p[i]==' ' || name_p[i] == '-'))
+        {
+            is_valid=FALSE;
+            break;
+        }
+
+        is_valid=TRUE;
     }
-    return TRUE;
+
+    return is_valid;
 }
 
 

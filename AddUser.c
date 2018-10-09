@@ -155,8 +155,7 @@ node_t* add_user(node_t* head, int* total_users)
 
     printf(YELLOW"\nUsername must have\n"
            "  1) at most 10 characters\n"
-           "  2) no spaces in between\n"
-           "  3) only consist of digits\n"RESET);
+           "  2) no spaces in between\n"RESET);
 
     printf(YELLOW"\nPassword must have\n"
            "  1) at least 8 characters\n"

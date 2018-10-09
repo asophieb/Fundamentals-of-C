@@ -194,7 +194,8 @@ node_t* load_users(int* total_users)
 
     user_t user;
     node_t* head = (node_t*) malloc(sizeof(node_t));
-
+    head=NULL;
+    
     if (fp != NULL)
     {
         *total_users = 0;
