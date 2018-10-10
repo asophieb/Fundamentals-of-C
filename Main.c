@@ -24,6 +24,8 @@ git git add . --> git commit -m "comment" --> git push origin master  as, 1!
 #define WHITE    "\x1B[37m"
 #define RESET    "\x1B[0m"
 
+#define DATABASE "user.txt"
+
 /*******************************************************************************
  * Function prototypes
 *******************************************************************************/
@@ -59,6 +61,7 @@ int main(void)
 		{
 			if(admin_password() != 0)
 			{
+				system("clear");
 				if(task_admin_selector(total_users, head) == 1)
 				{
 					system("clear");
@@ -70,6 +73,7 @@ int main(void)
 		{
 			if(user_password(node) != 0)
 			{
+				system("clear");
 				if(task_user_selector(total_users, head, node) == 1)
 				{
 					system("clear");
@@ -129,15 +133,13 @@ int task_admin_selector(int total_users, node_t* head)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
 				head = add_user(head, &total_users);
-				save_users(head);
 				break;
 			case 2: 
 				delete_user(head);
-				save_users(head);
 				break;
 			case 3: 
+				system("gzip -d " DATABASE); 
 				edit_info_menu(head);
-				save_users(head);
 				break;
 			case 4: 
 				/* TODO: View transaction logs */
@@ -146,9 +148,11 @@ int task_admin_selector(int total_users, node_t* head)
 				view_user_info(head);
 				break;
 			case 6:
+				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 0;
 			case 7: 
+				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 1;
 			default:
@@ -225,9 +229,11 @@ int task_user_selector(int total_users, node_t* head, node_t* node)
 				change_password(head, node);
 				break;
 			case 7:
+				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 0;	
 			case 8: 
+				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 1;
 			default:

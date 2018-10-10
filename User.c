@@ -176,6 +176,8 @@ void save_users(node_t* head)
      }
 
     fclose(fp);
+
+    system("gzip " DATABASE); 
 }
 
 /*******************************************************************************
@@ -190,6 +192,8 @@ node_t* load_users(int* total_users)
 {
     FILE *fp;
 
+    system("gzip -d " DATABASE);
+ 
     fp = fopen(DATABASE, "r");
 
     user_t user;

@@ -45,6 +45,7 @@ void delete_user(node_t* head)
             }
             else
             {
+                system("clear");
                 printf("User will not be deleted.\n");
                 break;
             }
@@ -52,6 +53,7 @@ void delete_user(node_t* head)
 
         else
         {
+            system("clear");
             printf(RED"Please enter a valid choice.\n"RESET);
             break;
         }
@@ -188,6 +190,7 @@ void edit_info_menu(node_t* head)
         system("clear");
         printf("Enter the user ID of the user to be edited > ");
         scanf("%s", choice);
+        system("clear");
         if(find_node(head, choice) != NULL)
         {
             node = find_node(head, choice);

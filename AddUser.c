@@ -215,16 +215,17 @@ node_t* add_user(node_t* head, int* total_users)
     printf("\nAccount Details:\n\n");
     printf("\tAccount Type: Balance\n\tNet Balance: $%.2f\n"RESET, temp_user.balance);
     printf(GREEN"\n\n\n\nPress Enter to continue..."RESET);
+    while (getchar()!='\n'); /* waits for the user to press Enter to exit */
+    system("clear");
 
-    if(*(total_users)==0)
+
+    if(*(total_users) == 0)
         head=create_head(temp_user);
 
     else
         insert_node(head, temp_user);
 
     ++*(total_users);
-
-    while (getchar()!='\n'); /* waits for the user to press Enter to exit */
 
     return head;
 }

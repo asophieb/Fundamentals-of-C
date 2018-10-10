@@ -1,5 +1,7 @@
 #include "Encrypt.h"
 
+#define XOR_KEY '!'
+
 char* XOR(char* string, char key)
 {
     int i;
@@ -15,7 +17,7 @@ char* XOR(char* string, char key)
 
 user_t encrypt(user_t user)
 {
-    char XORkey = '!';
+    char XORkey = XOR_KEY;
 
     user_t temp_user;
 
@@ -39,7 +41,7 @@ user_t encrypt(user_t user)
       So we multiply by 100 to make it a whole number*/
 
     int temp_balance;
-    temp_balance = (int)user.balance*100;
+    temp_balance = (int)user.balance*10000;
     temp_user.balance=(float) (temp_balance ^ XORkey);
 
     return temp_user;
@@ -47,7 +49,7 @@ user_t encrypt(user_t user)
 
 user_t decrypt(user_t user)
 {
-    char XORkey = '!';
+    char XORkey = XOR_KEY;
 
     user_t temp_user;
 
@@ -73,7 +75,7 @@ user_t decrypt(user_t user)
 
     int temp_balance;
     temp_balance=(int) user.balance ^ XORkey;
-    temp_user.balance=(float)temp_balance / 100;
+    temp_user.balance=(float)temp_balance / 10000;
 
     return temp_user;
 }

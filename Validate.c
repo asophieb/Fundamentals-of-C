@@ -116,17 +116,6 @@ int is_valid_username(const char* username)
 
             for(i=0; username[i]!='\0'; i++)
             {
-                if(username[i] >= 'a' && username[i] <= 'z')
-                {
-                    is_valid = FALSE;
-                    break;
-                }
-
-                if(username[i] >= 'A' && username[i] <= 'Z')
-                {
-                    is_valid = FALSE;
-                    break;
-                }
 
                 if(username[i] == ' ')
                 {
