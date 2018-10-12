@@ -17,7 +17,7 @@
 
 
 /*******************************************************************************
- * Author: Sophie
+ * Author: Matthew, Sophie
  * This function searches checks for admin login, otherwise finds and logs in 
  * the user.
  * inputs:
@@ -27,19 +27,24 @@
 *******************************************************************************/
 node_t* login(node_t* head)
 {
+     #ifdef DEBUG
+        printf("admin login username is 'admin'.\n");
+     #endif
+
     char username[MAX_USERNAME];
     node_t* node = NULL;
 
+    system("clear");
     printf("\n\t\t\t Welcome to Bank\n\n");
     while(node == NULL)
     {
         printf("\t Username:");
         scanf("%s", username);
 
-        if (strcmp(username, "admin") == 0) /*Hard code admin*/
+        if (strcmp(username, "admin") == 0)
         {
-            /*Welcome Administrator*/
-            return NULL;/*return when its admin*/
+           /*return when its admin*/
+            return NULL;
         }
         else
         {
@@ -50,21 +55,30 @@ node_t* login(node_t* head)
             }
             else
             {
-                /*Welcome User*/
-                return(node);/*return when is user*/
+                /*return when is user*/
+                return(node);
             }
         }
     }   
     return 0;
 }
 
+/*******************************************************************************
+ * Author: Matthew
+ * This function searches checks for admin login, otherwise finds and logs in 
+ * the user.
+ * inputs:
+ * - head of the user list.
+ * outputs:
+ * - null if admin, otherwise a pointer to the user.
+*******************************************************************************/
 int user_password(const node_t* node)
 {
     char pass[MAX_PASSWORD];
-    int exit = 0;
+    int exit = 1;
     /*printf("%s\n", saved_password );*/
 
-    while(exit < 5)
+    while(exit < 6)
     {
         printf("\t Password:");
         system("stty -echo"); /* Turns off character display */
@@ -80,6 +94,7 @@ int user_password(const node_t* node)
         }
         else
         {
+            system("clear");
             printf("\n\n\t Welcome to your Account, %s %s \n\n", 
                     node->user.first_name, node->user.last_name);
             return 1; /*return 1 when user signed in*/
@@ -91,26 +106,43 @@ int user_password(const node_t* node)
     return 0;
 }
 
+/*******************************************************************************
+ * Author: Matthew
+ * This function requests the password for the admin account and 
+ * the user.
+ * inputs:
+ * - head of the user list.
+ * outputs:
+ * - null if admin, otherwise a pointer to the user.
+*******************************************************************************/
 int admin_password()
 {
+     #ifdef DEBUG
+        printf("admin password is 'password'.\n");
+     #endif
+
     char pass[MAX_PASSWORD];
     int exit = 1;
 
-    while (exit < 5)
+    while (exit < 6)
     {
         printf("\t Password:");
-        system("stty -echo"); /* Turns off character display */
+        /* Turns off character display */
+        system("stty -echo"); 
         scanf("%s",pass);
-        system("stty echo"); /* Turn echoing of characters back on */
+        /* Turn echoing of characters back on */
+        system("stty echo"); 
         
-        if(strcmp(ADMIN_PASSWORD, pass) != 0)/*Admin password compear*/
+        /*Admin password compear*/
+        if(strcmp(ADMIN_PASSWORD, pass) != 0)
         {
             exit++;
-            printf(RED "\n\n\t *Wrong Password*\n\n" RESET);
-            printf("\t Attempt %d\n",exit);
+            printf(RED "\n\n\t *Wrong Password*\n\n"RESET);
+            printf("\t Attempt %d\n", exit);
         }
         else
-            return 1; /* return 1 when admin signed in */
+            /* return 1 when admin signed in */
+            return 1;
     }
     printf(RED "\n\t Sorry you are locked out.\n" RESET);
     system("clear");

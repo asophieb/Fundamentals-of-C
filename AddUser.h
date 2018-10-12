@@ -18,5 +18,12 @@
 #define RESET    "\x1B[0m"
 
 node_t* add_user(node_t* head, int* total_users);
+void user_set_lastname(user_t temp_user);
+void user_set_DOB(user_t temp_user);
+void user_set_phone(user_t temp_user);
+void user_set_email(user_t temp_user);
+void user_set_address(user_t temp_user);
+void user_set_username(node_t* head, user_t temp_user);
+void user_set_password(user_t temp_user);
 
 #endif

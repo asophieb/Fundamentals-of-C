@@ -36,7 +36,7 @@ void delete_user(node_t* head)
             print_user(node->user);
             printf(YELLOW"Do you want to delete this user? y or n > "RESET);
             scanf(" %c", &confirm);
-            if(strcmp(&confirm, "y"))
+            if(confirm == 'y' || confirm == 'Y')
             {
                 remove_node(head, node);
                 system("clear");
@@ -121,7 +121,15 @@ void edit_user(char* property, char* property_name)
     }   
 }
 
-
+/*******************************************************************************
+ * Author: Sophie
+ * This function allows the user to edit user passwords.
+ * inputs:
+ * - reference to the property to change
+ * - the name of the propertry to change
+ * outputs:
+ * - none
+*******************************************************************************/
 void change_password(node_t* head, node_t* node)
 {
     char placeholder[256];
@@ -129,9 +137,11 @@ void change_password(node_t* head, node_t* node)
 
     while(1)
     {               
+        /* ask for the new value */
         printf("Enter the new password > ");
         scanf("%s", placeholder);
 
+        /* check if valid */
         if(is_valid_password(placeholder))
         {
             system("clear");
@@ -147,6 +157,7 @@ void change_password(node_t* head, node_t* node)
         }
     }
 
+    /* confirm change */
     while(1)
     {
         printf(YELLOW"\nDo you accept this change? y or n > "RESET);
@@ -177,6 +188,15 @@ void change_password(node_t* head, node_t* node)
     }   
 }
 
+/*******************************************************************************
+ * Author: Sophie
+ * This function prints the menu for the information editor function and 
+ * prompts the user to select a funciton to ednit
+ * inputs:
+ * - pointer to first node
+ * outputs:
+ * - none
+*******************************************************************************/
 void edit_info_menu(node_t* head)
 {   
     char placeholder[256];
@@ -217,18 +237,23 @@ void edit_info_menu(node_t* head)
                 
                 switch (i)
                 { /* Comment out get each case to test each function works. */
-                    case 1:                             
+                    case 1:  
+                        /* change first name */                           
                         edit_user(node->user.first_name, "first name");
                         break;
                     case 2: 
+                        /* change last name */
                         edit_user(node->user.last_name, "last name");
                         break;
                     case 3:
+                        /* change DOB */
                         while(1)
-                        {               
+                        {   
+                            /* ask for new value */           
                             printf("Enter the new Date of Birth dd/mm/yyyy> ");
                             scanf("%d/%d/%d", &day, &month, &year);
 
+                            /* validate value */
                             if(is_valid_DOB(day, month, year))
                             {
                                 system("clear");
@@ -246,6 +271,7 @@ void edit_info_menu(node_t* head)
                             }
                         }
 
+                        /* confirm change */                       
                         while(1)
                         {
                             printf("\nDo you accept this change? y or n > ");
@@ -282,11 +308,14 @@ void edit_info_menu(node_t* head)
                         }   
                         break;
                     case 4: 
+                        /* change phone number */
                         while(1)
-                        {               
+                        {  
+                            /* enter value */             
                             printf("Enter the new phone number > ");
                             scanf("%s", placeholder);
 
+                            /* check if value is valid */
                             if(is_valid_phone(placeholder))
                             {
                                 system("clear");
@@ -300,6 +329,7 @@ void edit_info_menu(node_t* head)
                             }
                         }
 
+                        /* confirm change */
                         while(1)
                         {
                             printf(YELLOW"\nDo you accept this change? y or n > "RESET);
@@ -329,11 +359,14 @@ void edit_info_menu(node_t* head)
                         }   
                         break;
                     case 5:
+                        /* change user email */
                         while(1)
                         {               
+                            /* request value */
                             printf("Enter the new email > ");
                             scanf("%s", placeholder);
 
+                            /* check if value is valid */
                             if(is_valid_email(placeholder))
                             {
                                 system("clear");
@@ -347,6 +380,7 @@ void edit_info_menu(node_t* head)
                             }
                         }
 
+                        /* confirm change */
                         while(1)
                         {
                             printf(YELLOW"\nDo you accept this change? y or n > "RESET);
@@ -376,13 +410,15 @@ void edit_info_menu(node_t* head)
                         }   
                         break;
                     case 6: 
+                        /* change address */
+                        /* get new address */
                         printf("Enter the new address > ");
                         scanf("%[^\n]",placeholder);
 
                         system("clear");
                         printf("The user's address will change from %s to %s\n", 
                                 node->user.address, placeholder);
-
+                        /* confirm change */
                         while(1)
                         {
                             printf(YELLOW"\nDo you accept this change? y or n > "RESET);
@@ -414,12 +450,14 @@ void edit_info_menu(node_t* head)
 
                         break;
                     case 7:
-
+                        /* change user's username */
                         while(1)
-                        {               
+                        {     
+                            /* enter new username */          
                             printf("Enter the new username > ");
                             scanf("%s", placeholder);
 
+                            /* check if username is valid*/
                             if(is_valid_username(placeholder))
                             {
                                 system("clear");
@@ -433,6 +471,7 @@ void edit_info_menu(node_t* head)
                             }
                         }
 
+                        /* confirm change */
                         while(1)
                         {
                             printf(YELLOW"\nDo you accept this change? y or n > "RESET);
@@ -464,12 +503,15 @@ void edit_info_menu(node_t* head)
 
                         break;
                     case 8: 
+                        /* change user password */
                         change_password(head, node);
                         break;
                     case 9:
+                        /* print user information */
                         print_user(node->user);
                         break; 
                     case 0:
+                        /* exit the editor*/
                         return;
                     default:
                         printf(RED"Invalid choice.\n"RESET);
@@ -503,31 +545,29 @@ void view_user_info(node_t* head)
         printf("Enter the User ID of a specific user or press * to print all > ");
         scanf("%s", choice);
 
-       if(head == NULL)
-       {
+        if(head == NULL)
+        {
             system("clear");
             printf("There are currently no users stored.");
             break;
-       }
-
+        }
+        /* print all users if * is entered */
         else if(!(strcmp(choice, "*")))
         {
             print_all_users(head);
             break;
         }
-
+        /* print specific user if found in linked list */
         else if(find_node(head, choice) != NULL)
         {
             node_t* node = find_node(head, choice);
             print_user(node->user);
             break;
         }
-
         else if(find_node(head, choice) == NULL)
         {
             printf("Please enter a valid user.\n");
         }
-
         else
         {
             printf("Please enter a valid choice.\n");
@@ -536,7 +576,7 @@ void view_user_info(node_t* head)
 }
 
 /*******************************************************************************
- * Author: Rohan
+ * Author: Rohan, Sophie
  * This function either views all the transactions or transactions of a specific
  * username based on user input
  * inputs:
@@ -544,31 +584,23 @@ void view_user_info(node_t* head)
  * outputs:
  * - none
 *******************************************************************************/
-void view_transaction_logs(void)
+void view_transaction_logs()
 {
-    int user_choice;
-    char search_username[MAX_USERNAME_LEN+1];
+    char choice[MAX_USERNAME_LEN];
+    
+    printf("Enter username or enter * to print all > ");
+    scanf("%s", choice);
 
-    printf("\n\t1. View by Username"
-           "\n\t2. View All Transaction Histories"
-           "\n\nEnter choice> ");
-    scanf("%d", &user_choice);
+    if(!strcmp(choice, "*"))
+     {
+        while(getchar()!='\n');
+        view_all_logs();        
+     }   
 
-    switch (user_choice)
+    else 
     {
-        case 1:
-            system("clear");
-            printf("\n\tSearch Username: ");
-            scanf("%s", search_username);
-            view_log_username(search_username);
-            break;
-
-        case 2:
-            view_all_logs();
-            break;
-
-        default:
-            printf("Invalid Input!");
-            break;
+        while(getchar()!='\n');
+        view_log_username(choice);
     }
+        
 }

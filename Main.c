@@ -40,9 +40,6 @@ int task_user_selector(int total_users, node_t* head, node_t* node);
 *******************************************************************************/
 int main(void)
 {
-	#ifdef DEBUG
-		printf("help\n");
-	#endif
 
 	node_t* head = NULL;
 	node_t* node;
@@ -52,11 +49,13 @@ int main(void)
 	head = load_users(&total_users);
 	system("clear");
 
-	/* login process, loops each time there's a log out, breaks on exit code */
+
 	while(1)
 	{
+
 		node = login(head);
 
+		/* if login is admin */
 		if(node == NULL)
 		{
 			if(admin_password() != 0)
@@ -69,11 +68,11 @@ int main(void)
 				}
 			}
 		}
+		/* if login is user ID */
 		else
 		{
 			if(user_password(node) != 0)
 			{
-				system("clear");
 				if(task_user_selector(total_users, head, node) == 1)
 				{
 					system("clear");
@@ -118,7 +117,6 @@ void admin_menu(void)
 *******************************************************************************/
 int task_admin_selector(int total_users, node_t* head)
 {
-	
 	while(1)
 	{
 		admin_menu();
@@ -132,26 +130,33 @@ int task_admin_selector(int total_users, node_t* head)
 		switch (i)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
+				/* add user to linked list */
 				head = add_user(head, &total_users);
 				break;
 			case 2: 
+				/* remove user from linked list*/
 				delete_user(head);
 				break;
 			case 3: 
+				/* Unzip user.txt and open edit user menu*/
 				system("gzip -d " DATABASE); 
 				edit_info_menu(head);
 				break;
 			case 4: 
-				/* TODO: View transaction logs */
+				/* print list of user transactions */
+				view_transaction_logs();
 				break;
 			case 5: 
+				/* view user information */
 				view_user_info(head);
 				break;
 			case 6:
+				/* save file and return to login screen*/
 				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 0;
 			case 7: 
+				/* save file and exit program*/
 				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 1;
@@ -186,7 +191,7 @@ void user_menu(void)
 }
 
 /*******************************************************************************
- * Author: Sophie, Owen
+ * Author: Sophie
  * This function switches between tasks for the user side of the program.
  * inputs:
  * - none
@@ -208,31 +213,39 @@ int task_user_selector(int total_users, node_t* head, node_t* node)
 		switch (i)
 		{ /* Comment out get each case to test each function works. */
 			case 1: 
+				/* deposit moeny into user's account */
 				deposit(node);
 				break;
 			case 2: 
+				/* withdraw money from user's account */
 				withdraw(node);
 				break;
 			case 3: 
+				/* transfer money from one user to another */
 				transfer(head, node);
 				break;
 			case 4: 
+				/* print user's current balance */
 				system("clear");
 				printf("-------------------------------------\n"	
 					   "Your balance is currently $%.2lf\n", node->user.balance);
 				printf("-------------------------------------\n");
 				break;
 			case 5: 
+				/* print user's personal information */
 				print_user(node->user);
 				break;
 			case 6:
+				/* change user's password */
 				change_password(head, node);
 				break;
 			case 7:
+				/* Save user changes and return to login screen */
 				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 0;	
 			case 8: 
+				/* save user changes and exit program */
 				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 1;

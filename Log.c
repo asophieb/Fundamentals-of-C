@@ -8,7 +8,6 @@
  * outputs:
  * - time
 *******************************************************************************/
-
 datetime_t get_time(void)
 {
     /* bash command to get system time and store in 'time' file */
@@ -63,7 +62,6 @@ void save_log(const log_t log)
  * outputs:
  * - log (encrypted log)
 *******************************************************************************/
-
 log_t encrypt_log(log_t log)
 {
     /* encrypt the information */
@@ -149,8 +147,7 @@ void print_log(log_t log, int print_headings)
  * outputs:
  * - none
 *******************************************************************************/
-void add_log
-(const char* username, const char* description, const float amount)
+void add_log(const char* username, const char* description, const float amount)
 {
     datetime_t current_time=get_time();
 
@@ -159,7 +156,7 @@ void add_log
     log.time = current_time;
     strcpy(log.username, username);
     strcpy(log.description, description);
-    log.amount=amount;
+    log.amount = amount;
 
     /* save the encrypted log in the file */
     save_log(encrypt_log(log));
@@ -173,7 +170,7 @@ void add_log
  * outputs:
  * - none
 *******************************************************************************/
-void view_log_username (char* search_username)
+void view_log_username(char* search_username)
 {
     system("gzip -d " TRANS_LOG);
 
@@ -224,7 +221,7 @@ void view_log_username (char* search_username)
         system("gzip " TRANS_LOG);
 
         if(log_found==FALSE)
-            printf("No Transaction Found!\n");
+            printf("No Transactions Found.\n");
 
         else
             printf("\nPress Enter to continue . . . ");
@@ -233,7 +230,7 @@ void view_log_username (char* search_username)
     }
 
     else
-        printf("No Transaction Found!\n");
+        printf("No Transactions Found.\n");
 }
 
 /*******************************************************************************
@@ -287,5 +284,5 @@ void view_all_logs (void)
     }
 
     else
-     printf("No Transaction Found!\n");
+     printf("No Transactions Found.\n");
 }

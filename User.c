@@ -11,6 +11,7 @@
 *******************************************************************************/
 void deposit(node_t* node)
 {
+    /* get amount */
     double amount; 
     system("clear");
     printf("Your account balance is now $%.2lf\n", node->user.balance);
@@ -18,12 +19,15 @@ void deposit(node_t* node)
     scanf("%lf", &amount);
     system("clear");
     
+    /* check if amount is valid */
     if(amount > 0)
     {
         node->user.balance = node->user.balance + amount;
         printf("Your transaction has been processed...\n");
         printf("Your account balance is now $%.2lf\n", node->user.balance);
         printf("--------------------------------------\n");
+        /* record transaction */
+        add_log(node->user.login.username, "deposit", amount);
     }
     
     else
@@ -46,30 +50,32 @@ void withdraw(node_t* node)
 {
     double amount; 
     
+    /* get amount */
     system("clear");
     printf("Your account balance is $%.2lf\n", node->user.balance);
     printf("Please enter the amount that you wish to withdraw > ");
     scanf("%lf", &amount);
     system("clear");
     
+    /* check if amount is valid */
     if(amount <= node->user.balance && amount > 0)
     {
         node->user.balance = node->user.balance - amount;
         printf("Your transaction has been processed...\n");
         printf("Your account balance is now $%.2lf\n", node->user.balance);
         printf("--------------------------------------\n");
+        /* record transaction */
+        add_log(node->user.login.username, "withdraw", amount);
     }
 
     else if(amount >= node->user.balance)
-        {
-            printf("Unable to process transaction.\n");
-            printf("Please ensure you have sufficent funds.\n");
-        }
-    
-    else
     {
         printf("Unable to process transaction.\n");
+        printf("Please ensure you have sufficent funds.\n");
     }
+    
+    else
+        printf("Unable to process transaction.\n");
 
 }
 
@@ -88,14 +94,18 @@ void transfer(node_t* head, node_t* node)
     char ID[MAX_USERNAME_LEN];
     node_t* transfer_node;
 
+    /* get user ID of account that will recieve money */
     printf("Please enter the User ID to transfer to > ");
     scanf("%s", ID);
     transfer_node = find_node(head, ID);
 
+    /* check if recipient is a valid user */
     if(transfer_node != NULL)
     {
         printf("Please enter the amount to be transferred > ");
         scanf("%lf", &amount);
+
+        /* check if amount is valid */
         if(amount <= node->user.balance && amount > 0)
         {   
             transfer_node->user.balance = transfer_node->user.balance + amount;
@@ -103,6 +113,8 @@ void transfer(node_t* head, node_t* node)
             printf("Your transaction has been processed...\n"
                    "Your account balance is now $%.2lf\n", node->user.balance);
             printf("--------------------------------------\n");
+            /* record transaction */
+            add_log(node->user.login.username, "transfer", amount);
 
         }
         else if(amount >= node->user.balance)

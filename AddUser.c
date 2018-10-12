@@ -13,6 +13,7 @@
 #define FALSE 0
 
 /*******************************************************************************
+ * Author: Rohan
  * This function adds a user in RAM with all instructions on how to use
  * this program.
  * inputs:
@@ -43,9 +44,7 @@ node_t* add_user(node_t* head, int* total_users)
 
         /* validate first name */
         if (is_valid_name(temp_user.first_name) == TRUE)
-        {
             break;
-        }
 
         printf(RED"Invalid input.\n"RESET);
     }
@@ -62,9 +61,7 @@ node_t* add_user(node_t* head, int* total_users)
 
         /* validate last name */
         if (is_valid_name(temp_user.last_name) == TRUE)
-        {
             break;
-        }
 
         printf(RED"Invalid input.\n"RESET);
     }
@@ -85,15 +82,17 @@ node_t* add_user(node_t* head, int* total_users)
         if(is_valid_DOB( temp_user.DOB.day,
                          temp_user.DOB.month,
                          temp_user.DOB.year)==TRUE)
-        {
             break;
-        }
 
         printf(RED"Invalid input.\n"RESET);
     }
 
 
     /* Get Phone Number */
+    #ifdef DEBUG
+        printf("phone number must be 10 digits.\n";
+    #endif
+
     while(1)
     {
         printf(GREEN"\nPhone>\n"RESET);
@@ -105,9 +104,7 @@ node_t* add_user(node_t* head, int* total_users)
 
         /* validate phone */
         if(is_valid_phone(temp_user.phone)==TRUE)
-        {
             break;
-        }
 
         printf(RED"Invalid input.\n"RESET);
     }
@@ -123,10 +120,8 @@ node_t* add_user(node_t* head, int* total_users)
         while (getchar()!='\n');
 
         /* validate email */
-        if(is_valid_email(temp_user.email)==TRUE)
-        {
+        if(is_valid_email(temp_user.email) == TRUE)
             break;
-        }
 
         printf(RED"Invalid input.\n"RESET);
     }
@@ -176,9 +171,7 @@ node_t* add_user(node_t* head, int* total_users)
         if(is_valid_username(temp_user.login.username)==TRUE)
         {
             if(find_node(head, temp_user.login.username)==NULL)
-            {
                 break;
-            }
 
             printf(RED"\tThis username is already in use.\n"RESET);
         }
@@ -198,9 +191,7 @@ node_t* add_user(node_t* head, int* total_users)
 
         /* check for password validity */
         if(is_valid_password(temp_user.login.password) == TRUE)
-        {
             break;
-        }
 
         printf(RED"\tPassword is too weak.\n"RESET);
     }
@@ -229,3 +220,5 @@ node_t* add_user(node_t* head, int* total_users)
 
     return head;
 }
+
+

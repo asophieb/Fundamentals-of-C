@@ -2,6 +2,15 @@
 
 #define XOR_KEY '!'
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function XORs a string with a pre-determined key 
+ * inputs:
+ * - string to be XORed
+ * - key for XOR process
+ * outputs:
+ * - XORed string
+*******************************************************************************/
 char* XOR(char* string, char key)
 {
     int i;
@@ -15,12 +24,25 @@ char* XOR(char* string, char key)
 
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function uses the XOR function to encrypt user information
+ * inputs:
+ * - user information
+ * outputs:
+ * - XORed user information
+*******************************************************************************/
 user_t encrypt(user_t user)
 {
+    #ifdef DEBUG
+        printf("The key is %c\n", XOR_KEY);
+    #endif
+
     char XORkey = XOR_KEY;
 
     user_t temp_user;
 
+    /* set current user information to XORed value */
     strcpy(temp_user.login.username,XOR(user.login.username, XORkey));
     strcpy(temp_user.login.password,XOR(user.login.password, XORkey));
 
@@ -47,12 +69,25 @@ user_t encrypt(user_t user)
     return temp_user;
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function uses teh XOR function to decrypt the user information 
+ * inputs:
+ * - encrypted user information
+ * outputs:
+ * - decrypted user information
+*******************************************************************************/
 user_t decrypt(user_t user)
 {
+     #ifdef DEBUG
+        printf("The key is %c\n", XOR_KEY);
+     #endif
+
     char XORkey = XOR_KEY;
 
     user_t temp_user;
 
+    /* set current user information to XORed value */
     strcpy(temp_user.login.username,XOR(user.login.username, XORkey));
     strcpy(temp_user.login.password,XOR(user.login.password, XORkey));
 

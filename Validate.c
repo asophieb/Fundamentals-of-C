@@ -1,6 +1,15 @@
 #include "Validate.h"
 
-int is_valid_DOB (const int day, const int month, const int year)
+
+/*******************************************************************************
+ * Author: Rohan
+ * This function checks if the DOB is a valid entry 
+ * inputs:
+ * - integer date including day, month and year 
+ * outputs:
+ * - 1 if valid, 0 if invalid
+*******************************************************************************/
+int is_valid_DOB(const int day, const int month, const int year)
 {
     /* 'is_valid' is used as flag to check error */
     int is_valid=FALSE;
@@ -15,6 +24,14 @@ int is_valid_DOB (const int day, const int month, const int year)
     return is_valid;
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function checks if the name is valid 
+ * inputs:
+ * - name
+ * outputs:
+ * - 1 if valid, 0 if invalid 
+*******************************************************************************/
 int is_valid_name(const char* name_p)
 {
     int i; /* counter */
@@ -37,7 +54,14 @@ int is_valid_name(const char* name_p)
     return is_valid;
 }
 
-
+/*******************************************************************************
+ * Author: Rohan
+ * This function checks if the phone number is valid 
+ * inputs:
+ * - phone number 
+ * outputs:
+ * - 1 if valid, 0 if invalid 
+*******************************************************************************/
 int is_valid_phone(const char* phone_p)
 {
     int i; /* counter */
@@ -66,7 +90,15 @@ int is_valid_phone(const char* phone_p)
     return is_valid;
 }
 
-int is_valid_password (const char* password_p)
+/*******************************************************************************
+ * Author: Rohan
+ * This function checks if the password meets the criteria 
+ * inputs:
+ * - password 
+ * outputs:
+ * - 1 if valid, 0 if invalid 
+*******************************************************************************/
+int is_valid_password(const char* password_p)
 {
     int i; /* counter */
 
@@ -101,7 +133,14 @@ int is_valid_password (const char* password_p)
     return is_valid;
 }
 
-
+/*******************************************************************************
+ * Author: Rohan
+ * This function checks if the username meets teh criteria 
+ * inputs:
+ * - username
+ * outputs:
+ * - 1 if valid, 0 if invalid 
+*******************************************************************************/
 int is_valid_username(const char* username)
 {
     int length;
@@ -130,6 +169,14 @@ int is_valid_username(const char* username)
     return is_valid;
 }
 
+/*******************************************************************************
+ * Author: Rohan
+ * This function checks if a email is valid 
+ * inputs:
+ * - email address
+ * outputs:
+ * - 1 if valid, 0 if invalid 
+*******************************************************************************/
 int is_valid_email(const char* email)
 {
     int is_valid=FALSE;
