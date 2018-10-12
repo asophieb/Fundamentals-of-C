@@ -137,7 +137,7 @@ node_t* add_user(node_t* head, int* total_users)
         while (getchar()!='\n');
 
         /* Checks Address if field is empty */
-        if(temp_user.address[0]!='\0')
+        if(temp_user.address[0]!='\0' && temp_user.address[0]!=' ')
             break;
 
         printf(RED"Invalid input.\n"RESET);

@@ -35,7 +35,8 @@ char* XOR(char* string, char key)
 user_t encrypt(user_t user)
 {
     #ifdef DEBUG
-        printf("The XOR key is %c\n", XOR_KEY);
+        printf(" The XOR key is %c\n", XOR_KEY);
+        printf("\n %s was encrypted using the XOR key.\n", user.first_name);
     #endif
 
     char XORkey = XOR_KEY;
@@ -80,7 +81,8 @@ user_t encrypt(user_t user)
 user_t decrypt(user_t user)
 {
      #ifdef DEBUG
-        printf("The key is %c\n", XOR_KEY);
+        printf("The XOR key is %c\n ", XOR_KEY);
+        printf("\n a user was decrypted using the XOR key.");
      #endif
 
     char XORkey = XOR_KEY;

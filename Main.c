@@ -37,6 +37,8 @@ int main(void)
 
 	#ifdef DEBUG
         printf("debug flag is on.\n");
+        printf("Press Enter to Continue...");
+        while (getchar()!='\n');
      #endif
 
 	node_t* head = NULL;
@@ -45,7 +47,6 @@ int main(void)
 
 	int total_users = 0;
 	head = load_users(&total_users);
-	system("gzip -d " DATABASE);
 	system("clear");
 
 
@@ -80,7 +81,6 @@ int main(void)
 			}
 		}
 	}
-	system("gzip " DATABASE); 
 	return 0;
 }
 
@@ -182,8 +182,9 @@ void user_menu(void)
 		   "4. View Balance\n"
 		   "5. View Personal Info\n"
 		   "6. Change Password\n"
-		   "7. Log Off\n"
-		   "8. Exit Program\n"
+		   "7. View Transaction History\n"
+		   "9. Log Off\n"
+		   "9. Exit Program\n"
 		   "Enter choice (Between 1-8)>\n");
 }
 
@@ -237,13 +238,14 @@ int task_user_selector(int total_users, node_t* head, node_t* node)
 				change_password(head, node);
 				break;
 			case 7:
+				view_log_username(node->user.login.username);
+				break;
+			case 8:
 				/* Save user changes and return to login screen */
-				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 0;	
-			case 8: 
+			case 9: 
 				/* save user changes and exit program */
-				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 1;
 			default:

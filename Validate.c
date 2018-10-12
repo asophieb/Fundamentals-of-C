@@ -12,7 +12,7 @@
 int is_valid_DOB(const int day, const int month, const int year)
 {
     /* 'is_valid' is used as flag to check error */
-    int is_valid=FALSE;
+    int is_valid = FALSE;
 
     if(month>=1 && month<=12 &&
        day>=1 && day<=31 &&
@@ -22,6 +22,30 @@ int is_valid_DOB(const int day, const int month, const int year)
     }
 
     return is_valid;
+}
+
+/*******************************************************************************
+ * Author: Sophie
+ * This function checks if the address is a valid entry 
+ * inputs:
+ * - address
+ * outputs:
+ * - 1 if valid, 0 if invalid
+*******************************************************************************/
+int is_valid_address(const char* address)
+{
+    int is_valid = FALSE;
+    int i;
+
+    for(i=0; address !='\0'; i++)
+    {
+        if(!(address[0] >='0' && address[0]<='9'))  
+            return FALSE; 
+    }
+
+    is_valid = TRUE;
+    return is_valid;
+
 }
 
 /*******************************************************************************
@@ -36,7 +60,7 @@ int is_valid_name(const char* name_p)
 {
     int i; /* counter */
 
-    int is_valid=FALSE; /* used as flag to check error */
+    int is_valid = FALSE; /* used as flag to check error */
 
     for(i=0; name_p[i]!='\0'; i++)
     {

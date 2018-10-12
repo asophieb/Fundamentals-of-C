@@ -5,7 +5,7 @@ OBJ = Main.o LinkedList.o Login.o User.o Admin.o AddUser.o Validate.o Encrypt.c 
 build : $(OBJ)
 	$(CC) $(CFLAGS) -o Bank $(OBJ) 
 
-debug : clean $(OBJ)
+debug : $(OBJ)
 	$(CC) $(CFLAGS) -DDEBUG=1 -o Bank $(OBJ) 
 
 clean :

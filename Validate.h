@@ -15,5 +15,6 @@ int is_valid_phone(const char* phone_p);
 int is_valid_password(const char* password_p);
 int is_valid_username(const char* username);
 int is_valid_email(const char* email);
+int is_valid_address(const char* address);
 
 #endif

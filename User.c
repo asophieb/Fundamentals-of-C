@@ -169,6 +169,8 @@ void save_user(FILE* fp, const user_t user)
  *******************************************************************************/
 void save_users(node_t* head)
 {
+    system("gzip -d " DATABASE);
+
     FILE *fp;
     fp = fopen (DATABASE, "w");
 
@@ -189,7 +191,17 @@ void save_users(node_t* head)
 
     fclose(fp);
 
-    system("gzip " DATABASE); 
+    #ifdef DEBUG
+        system("clear");
+        printf("File encrypted and saved.\n");
+        printf("The XOR encrypt key is %c\n", XOR_KEY);
+    #endif
+
+     system("gzip "DATABASE);
+
+     #ifdef DEBUG
+        printf("File compressed\n");
+    #endif 
 }
 
 /*******************************************************************************
@@ -245,6 +257,13 @@ node_t* load_users(int* total_users)
         }
         fclose(fp);
     }
+
+    #ifdef DEBUG
+        printf("File Loaded and Decrypted...\n");
+        printf("The XOR encrypt key is %c\n\n", XOR_KEY);
+     #endif
+
+    system("gzip " DATABASE);
 
     return head;
 }
