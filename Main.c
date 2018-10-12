@@ -1,9 +1,3 @@
-/* Compile note - gcc -Wall -Werror -ansi -c 'filename'.c
-gcc -Wall -Werror 'filename'.o 'otherfile'.o 'main'.o -o Main
-
-git git add . --> git commit -m "comment" --> git push origin master  as, 1!
-
-*/
 
 #include <stdio.h>
 #include <string.h>
@@ -41,12 +35,17 @@ int task_user_selector(int total_users, node_t* head, node_t* node);
 int main(void)
 {
 
+	#ifdef DEBUG
+        printf("debug flag is on.\n");
+     #endif
+
 	node_t* head = NULL;
 	node_t* node;
 	head = (node_t*) malloc(sizeof(node_t));
 
 	int total_users = 0;
 	head = load_users(&total_users);
+	system("gzip -d " DATABASE);
 	system("clear");
 
 
@@ -81,6 +80,7 @@ int main(void)
 			}
 		}
 	}
+	system("gzip " DATABASE); 
 	return 0;
 }
 
@@ -139,7 +139,6 @@ int task_admin_selector(int total_users, node_t* head)
 				break;
 			case 3: 
 				/* Unzip user.txt and open edit user menu*/
-				system("gzip -d " DATABASE); 
 				edit_info_menu(head);
 				break;
 			case 4: 
@@ -152,12 +151,10 @@ int task_admin_selector(int total_users, node_t* head)
 				break;
 			case 6:
 				/* save file and return to login screen*/
-				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 0;
 			case 7: 
 				/* save file and exit program*/
-				system("gzip -d " DATABASE); 
 				save_users(head);
 				return 1;
 			default:

@@ -35,7 +35,7 @@ char* XOR(char* string, char key)
 user_t encrypt(user_t user)
 {
     #ifdef DEBUG
-        printf("The key is %c\n", XOR_KEY);
+        printf("The XOR key is %c\n", XOR_KEY);
     #endif
 
     char XORkey = XOR_KEY;

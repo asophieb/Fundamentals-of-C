@@ -35,7 +35,7 @@ node_t* login(node_t* head)
     node_t* node = NULL;
 
     system("clear");
-    printf("\n\t\t\t Welcome to Bank\n\n");
+    printf("\n\t\t\t Welcome to FoC Bank\n\n");
     while(node == NULL)
     {
         printf("\t Username:");

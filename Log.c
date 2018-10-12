@@ -64,22 +64,25 @@ void save_log(const log_t log)
 *******************************************************************************/
 log_t encrypt_log(log_t log)
 {
+    #ifdef DEBUG
+        printf("XOR key is %c.\n", XOR_KEY);
+    #endif
     /* encrypt the information */
-    log.time.day^=XORkey;
-    log.time.month^=XORkey;
-    log.time.year^=XORkey;
-    log.time.hour^=XORkey;
-    log.time.minute^=XORkey;
-    log.time.year^=XORkey;
+    log.time.day^=XOR_KEY;
+    log.time.month^=XOR_KEY;
+    log.time.year^=XOR_KEY;
+    log.time.hour^=XOR_KEY;
+    log.time.minute^=XOR_KEY;
+    log.time.year^=XOR_KEY;
 
-    strcpy(log.username, XOR(log.username, XORkey));
-    strcpy(log.description, XOR(log.description, XORkey));
+    strcpy(log.username, XOR(log.username, XOR_KEY));
+    strcpy(log.description, XOR(log.description, XOR_KEY));
 
     /* XOR encrypt amount which is a floating number */
     int temp_amount;
     temp_amount = (int)(log.amount*1000);
 
-    log.amount=(float) (temp_amount ^ XORkey);
+    log.amount=(float) (temp_amount ^ XOR_KEY);
 
     return log;
 }
@@ -95,20 +98,20 @@ log_t encrypt_log(log_t log)
 log_t decrypt_log(log_t log)
 {
     /* decrypt the information */
-    log.time.day^=XORkey;
-    log.time.month^=XORkey;
-    log.time.year^=XORkey;
-    log.time.hour^=XORkey;
-    log.time.minute^=XORkey;
-    log.time.year^=XORkey;
+    log.time.day^=XOR_KEY;
+    log.time.month^=XOR_KEY;
+    log.time.year^=XOR_KEY;
+    log.time.hour^=XOR_KEY;
+    log.time.minute^=XOR_KEY;
+    log.time.year^=XOR_KEY;
 
-    strcpy(log.username, XOR(log.username, XORkey));
-    strcpy(log.description, XOR(log.description, XORkey));
+    strcpy(log.username, XOR(log.username, XOR_KEY));
+    strcpy(log.description, XOR(log.description, XOR_KEY));
 
 
     /* decrypt amount which is a floating number */
     int temp_amount;
-    temp_amount=((int)log.amount) ^ XORkey;
+    temp_amount=((int)log.amount) ^ XOR_KEY;
     log.amount=(float)temp_amount / 1000;
 
     return log;
@@ -204,7 +207,7 @@ void view_log_username(char* search_username)
           strcpy(current_username, log.username);
 
          /* searches the log info of the username requested */
-          if(strcmp(search_username, XOR(current_username, XORkey))==0)
+          if(strcmp(search_username, XOR(current_username, XOR_KEY))==0)
           {
               print_log(decrypt_log(log), print_headings);
 

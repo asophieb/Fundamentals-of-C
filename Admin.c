@@ -26,12 +26,14 @@ void delete_user(node_t* head)
     while(1)
     {
         system("clear");
+        /* Get user to be deleted */
         printf("Enter the user ID of the user to be deleted > ");
         scanf("%s", username);
         node = find_node(head, username);
 
         if(node != NULL)
         {
+            /* confirm user to be deleted */
             system("clear");
             print_user(node->user);
             printf(YELLOW"Do you want to delete this user? y or n > "RESET);

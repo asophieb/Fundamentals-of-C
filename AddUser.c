@@ -90,7 +90,7 @@ node_t* add_user(node_t* head, int* total_users)
 
     /* Get Phone Number */
     #ifdef DEBUG
-        printf("phone number must be 10 digits.\n";
+        printf("phone number must be 10 digits.\n");
     #endif
 
     while(1)
@@ -200,7 +200,7 @@ node_t* add_user(node_t* head, int* total_users)
 
     system("clear");
 
-    temp_user.balance=0.00;
+    temp_user.balance = 0.00;
 
     printf(YELLOW"User %s has been created successfully!\n", temp_user.first_name);
     printf("\nAccount Details:\n\n");

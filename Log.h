@@ -14,7 +14,7 @@
 #define TRANS_LOG "TransactionLog"
 #define MAX_DESCRIPTION_LEN 20
 #define MAX_USERNAME_LEN 10
-#define XORkey '@'
+#define XOR_KEY '@'
 
 #define TRUE 1
 #define FALSE 0
