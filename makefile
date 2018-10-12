@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Werror -ansi -lm
 
-OBJ = Main.o LinkedList.o Login.o User.o Admin.o AddUser.o Validate.o Encrypt.o
+OBJ = Main.o LinkedList.o Login.o User.o Admin.o AddUser.o Validate.o Encrypt.o Log.o
 
 rebuild : clean build
 

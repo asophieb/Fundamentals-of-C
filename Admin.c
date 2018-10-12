@@ -17,7 +17,6 @@
  * outputs:
  * - none
 *******************************************************************************/
-
 void delete_user(node_t* head)
 {
     char username[MAX_USERNAME_LEN];
@@ -121,6 +120,7 @@ void edit_user(char* property, char* property_name)
         }
     }   
 }
+
 
 void change_password(node_t* head, node_t* node)
 {
@@ -532,5 +532,43 @@ void view_user_info(node_t* head)
         {
             printf("Please enter a valid choice.\n");
         }
+    }
+}
+
+/*******************************************************************************
+ * Author: Rohan
+ * This function either views all the transactions or transactions of a specific
+ * username based on user input
+ * inputs:
+ * - none
+ * outputs:
+ * - none
+*******************************************************************************/
+void view_transaction_logs(void)
+{
+    int user_choice;
+    char search_username[MAX_USERNAME_LEN+1];
+
+    printf("\n\t1. View by Username"
+           "\n\t2. View All Transaction Histories"
+           "\n\nEnter choice> ");
+    scanf("%d", &user_choice);
+
+    switch (user_choice)
+    {
+        case 1:
+            system("clear");
+            printf("\n\tSearch Username: ");
+            scanf("%s", search_username);
+            view_log_username(search_username);
+            break;
+
+        case 2:
+            view_all_logs();
+            break;
+
+        default:
+            printf("Invalid Input!");
+            break;
     }
 }

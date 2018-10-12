@@ -7,6 +7,7 @@
 
 #include "LinkedList.h"
 #include "Encrypt.h"
+#include "Log.h"
 
 #define DATABASE "user.txt"
 

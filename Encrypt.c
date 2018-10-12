@@ -41,7 +41,7 @@ user_t encrypt(user_t user)
       So we multiply by 100 to make it a whole number*/
 
     int temp_balance;
-    temp_balance = (int)user.balance*10000;
+    temp_balance = (int)(user.balance*10000);
     temp_user.balance=(float) (temp_balance ^ XORkey);
 
     return temp_user;
@@ -74,7 +74,7 @@ user_t decrypt(user_t user)
        to make it a floating number equal to the original balance*/
 
     int temp_balance;
-    temp_balance=(int) user.balance ^ XORkey;
+    temp_balance=((int)user.balance) ^ XORkey;
     temp_user.balance=(float)temp_balance / 10000;
 
     return temp_user;
